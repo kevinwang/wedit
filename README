@@ -1,0 +1,38 @@
+WEdit by Kevin Wang and Shan Shi
+
+Description
+    WEdit is a collaborative real time text editor with integrated chat functionality.
+
+Design
+    WEdit will utilize a client-server architecture.
+    Server: The server will store the centralized text document being edited and listen for requests by clients to modify the document. The server will also need to broadcast all modifications to the document to all clients in order to synchronize all local copies of the document. In addition, the server will receive all chat messages and echo them to all clients.
+    Client: The client will display the text document to the user for editing. When the user makes a modification to the document such as an addition or a deletion of a character, the client will send a request to the server to update the centralized document. The client will also act as a simple chat client which allows the user to commuicate with all other collaborators.
+	The server will use WEdit to open a text document and then will be given a choice to share the session with others. If the server decides to share, clients will be able to connect to the server and the collaborative editing can begin, otherwise WEdit will work as a regular text editor. 
+	When a conflict is encountered, the server will send out a system message to chat and the change from the server will take precedence over that of the client.
+	
+	Features (subject to change):
+		Kick/ban client (for server)
+		Undo
+		Find (and replace)
+		Macros
+
+Implementation
+    The server and client will be developed as two separate projects. Communication between the two will be handled using Java sockets. The client will have a Swing GUI.
+    Socket communication from the client to the server will be formatted like the following and sent in a queue:
+        i,183,a (Insert the character 'a' at index 183)
+        d,149 (Delete the character at 149)
+        c,Hello world! (Broadcast the chat message "Hello world!")
+    Communication from the server to the client will be formatted similarly, except with an extra ability to send system messages to report on errors and warnings in chat.
+
+Development
+    We will use Git for revision control. We intend to use the IDE NetBeans because of familiarity with it from the Minecarft project and elsewhere, and also because the GUI builder allows us to focus on objectives other than tediously building the visual portion of a Swing GUI programmatically.
+
+Allocation
+    Work will be allocated as follows:
+        Kevin: Networking and GUI
+        Shan: Client and server
+
+Milestones
+    June 4:
+    June 11:
+    Deadline:
