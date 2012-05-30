@@ -4,6 +4,7 @@
  */
 package wedit.test;
 
+import static org.junit.Assert.*;
 import org.junit.*;
 import wedit.net.Request;
 
@@ -39,19 +40,19 @@ public class RequestTest {
     @Test
     public void requestStringTest() {
         Request r = new Request(Request.TYPE_INSERT, 694, "a");
-        Assert.assertEquals("Request string matches request", "i" + (char)31 + "694" + (char)31 + "a", r.toString());
-        Assert.assertNotSame("Delimiter is a regular space", "i 694 a", r.toString());
+        assertEquals("Request string matches request", "i" + (char)31 + "694" + (char)31 + "a", r.toString());
+        assertNotSame("Delimiter is a regular space", "i 694 a", r.toString());
     }
     
     @Test
     public void constructFromStringTest() {
         Request r = new Request("i" + (char)31 + "694" + (char)31 + "a");
-        Assert.assertEquals(Request.TYPE_INSERT, r.getRequestType());
-        Assert.assertEquals(694, r.getIndex(), 694);
-        Assert.assertEquals("a", r.getData());
+        assertEquals(Request.TYPE_INSERT, r.getRequestType());
+        assertEquals(694, r.getIndex(), 694);
+        assertEquals("a", r.getData());
         
         Request s = new Request("c" + (char)31 + "Hello world!");
-        Assert.assertEquals(Request.TYPE_CHAT, s.getRequestType());
-        Assert.assertEquals("Hello world!", s.getData());
+        assertEquals(Request.TYPE_CHAT, s.getRequestType());
+        assertEquals("Hello world!", s.getData());
     }
 }
