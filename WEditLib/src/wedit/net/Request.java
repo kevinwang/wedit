@@ -55,12 +55,12 @@ public class Request {
     }
 
     public Request(char requestType, int index, String data, Session origin) {
-        super(requestType, index, data);
+        this(requestType, index, data);
         this.origin = origin;
     }
 
     public Request(String requestString, Session origin) {
-        super(requestString);
+        this(requestString);
         this.origin = origin;
     }
     

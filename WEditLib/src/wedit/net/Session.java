@@ -4,6 +4,8 @@
  */
 package wedit.net;
 
+import java.net.Socket;
+
 /**
  *
  * @author Kevin Wang
