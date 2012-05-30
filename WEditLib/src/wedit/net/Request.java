@@ -21,6 +21,7 @@ public class Request {
     private char requestType;
     private int index;
     private String data;
+    private Session origin;
     
     /**
      * Constructs a request. If a particular parameter is not relevant to the
@@ -51,6 +52,16 @@ public class Request {
                 data = tokens[2];
             }
         }
+    }
+
+    public Request(char requestType, int index, String data, Session origin) {
+        super(requestType, index, data);
+        this.origin = origin;
+    }
+
+    public Request(String requestString, Session origin) {
+        super(requestString);
+        this.origin = origin;
     }
     
     /**
@@ -85,5 +96,9 @@ public class Request {
     
     public String getData() {
         return data;
+    }
+
+    public Session getOrigin() {
+        return origin;
     }
 }
