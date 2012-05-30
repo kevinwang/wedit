@@ -1,8 +1,10 @@
+package wedit.test;
+
 /*
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package wedit.test;
+
 
 import java.io.BufferedReader;
 import java.io.IOException;
