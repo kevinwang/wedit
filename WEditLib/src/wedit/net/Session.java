@@ -18,7 +18,9 @@ public class Session {
     private Socket socket;
     private BufferedReader in;
     private PrintWriter out;
-    private String nick;
+    private String nickname;
+    
+    private static int guestID = 1;
 
     public Session(Socket socket) {
         this.socket = socket;
@@ -27,6 +29,7 @@ public class Session {
             out = new PrintWriter(socket.getOutputStream(), true);
         } catch (IOException e) {
         }
+        nickname = "Guest" + guestID++;
     }
     
     public void write(Request request) {
@@ -42,10 +45,10 @@ public class Session {
     }
 
     public void setNick(String nick) {
-        this.nick = nick;
+        this.nickname = nick;
     }
 
     public String getNick() {
-        return nick;
+        return nickname;
     }
 }

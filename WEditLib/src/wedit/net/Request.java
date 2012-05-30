@@ -12,6 +12,7 @@ public class Request {
     public static final char TYPE_INSERT = 'i';
     public static final char TYPE_DELETE = 'd';
     public static final char TYPE_CHAT = 'c';
+    public static final char TYPE_NICK = 'n';
     
     /**
      * ASCII unit separator.
@@ -26,7 +27,7 @@ public class Request {
     /**
      * Constructs a request. If a particular parameter is not relevant to the
      * type of request being constructed, its value is irrelevant.
-     * @param requestType Type of request (insert, delete, chat).
+     * @param requestType Type of request (insert, delete, chat, etc.).
      * @param index Index at which to perform insertion/deletion.
      * @param data If insert request, string to be inserted. If chat request,chat message.
      */
@@ -43,7 +44,7 @@ public class Request {
     public Request(String requestString) {
         String[] tokens = requestString.split(DELIMITER);
         requestType = tokens[0].charAt(0);
-        if (requestType == TYPE_CHAT) {
+        if (requestType == TYPE_CHAT || requestType == TYPE_NICK) {
             data = tokens[1];
         }
         else {
@@ -79,7 +80,7 @@ public class Request {
             case TYPE_DELETE:
                 s += index;
                 break;
-            case TYPE_CHAT:
+            case TYPE_CHAT: case TYPE_NICK:
                 s += data;
                 break;
         }

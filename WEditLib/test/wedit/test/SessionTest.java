@@ -20,6 +20,8 @@ import wedit.net.Session;
  */
 public class SessionTest {
     Request request = new Request('i', 694, "a");
+    String newNick = "Kevin";
+    Request nickRequest = new Request('n', 0, newNick);
     ServerSocket serverSocket;
     Socket socket;
     Session session;
@@ -66,18 +68,123 @@ public class SessionTest {
             });
             serverThread.start();
             session = new Session(new Socket("localhost", 23343));
+            while (socket == null);
             reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             
-            session.write(request);
-            while (!reader.ready());
-            assertEquals(request.toString(), reader.readLine());
+            System.out.println(session.getNick());
             
             session.write(request);
             while (!reader.ready());
+            assertEquals("Request string is sent intact", request.toString(), reader.readLine());
+            
+            socket.close();
+            serverSocket.close();
+            session.close();
+        } catch (IOException e) {
+        }
+    }
+    
+    @Test
+    public void readRequestTest() {
+        try {
+            serverSocket = new ServerSocket(23343);
+            Thread serverThread = new Thread(new Runnable() {
+
+                @Override
+                public void run() {
+                    try {
+                        socket = serverSocket.accept();
+                    } catch (IOException e) {
+                    }
+                }
+                
+            });
+            serverThread.start();
+            session = new Session(new Socket("localhost", 23343));
+            while (socket == null);
+            reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+            
+            System.out.println(session.getNick());
+            
+            session.write(request);
+            while (!reader.ready());
+            
             Request receivedRequest = new Request(reader.readLine());
-            assertEquals(request.getRequestType(), receivedRequest.getRequestType());
-            assertEquals(request.getData(), receivedRequest.getData());
-            assertNotSame("\n", receivedRequest.getData().substring(receivedRequest.getData().length() - 1));
+            assertEquals("Request type is read properly", request.getRequestType(), receivedRequest.getRequestType());
+            assertEquals("Request data is read properly", request.getData(), receivedRequest.getData());
+            
+            socket.close();
+            serverSocket.close();
+            session.close();
+        } catch (IOException e) {
+        }
+    }
+    
+    @Test
+    public void noNewlineTest() {
+        try {
+            serverSocket = new ServerSocket(23343);
+            Thread serverThread = new Thread(new Runnable() {
+
+                @Override
+                public void run() {
+                    try {
+                        socket = serverSocket.accept();
+                    } catch (IOException e) {
+                    }
+                }
+                
+            });
+            serverThread.start();
+            session = new Session(new Socket("localhost", 23343));
+            while (socket == null);
+            reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+            
+            System.out.println(session.getNick());
+            
+            session.write(request);
+            while (!reader.ready());
+            
+            Request receivedRequest = new Request(reader.readLine());
+            assertNotSame("Last character of data string is not a newline character", "\n", receivedRequest.getData().substring(receivedRequest.getData().length() - 1));
+            
+            socket.close();
+            serverSocket.close();
+            session.close();
+        } catch (IOException e) {
+        }
+    }
+    
+    @Test
+    public void nickTest() {
+        try {
+            serverSocket = new ServerSocket(23343);
+            Thread serverThread = new Thread(new Runnable() {
+
+                @Override
+                public void run() {
+                    try {
+                        socket = serverSocket.accept();
+                    } catch (IOException e) {
+                    }
+                }
+                
+            });
+            serverThread.start();
+            session = new Session(new Socket("localhost", 23343));
+            while (socket == null);
+            reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+            
+            System.out.println(session.getNick());
+            
+            session.write(nickRequest);
+            while (!reader.ready());
+            
+            Request receivedRequest = new Request(reader.readLine());
+            session.setNick(receivedRequest.getData());
+            assertEquals("Session nickname changes properly", newNick, session.getNick());
+            
+            System.out.println(session.getNick());
             
             socket.close();
             serverSocket.close();
