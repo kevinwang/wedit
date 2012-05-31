@@ -26,22 +26,23 @@ public class RequestHandler {
             public void run() {
                 while (true) {
                     if (!requests.isEmpty()) {
+                        BacktracedRequest r;
                         synchronized (lock) {
-                            BacktracedRequest r = requests.remove();
-                            switch (r.getRequestType()) {
-                                case Request.TYPE_INSERT:
-                                    break;
-                                case Request.TYPE_DELETE:
-                                    break;
-                                case Request.TYPE_CHAT:
-                                    break;
-                                case Request.TYPE_NICK:
-                                    String newNick = r.getData();
-                                    r.getOrigin().setNick(newNick);
-                                    break;
-                                default:
-                                    break;
-                            }
+                            r = requests.remove();
+                        }
+                        switch (r.getRequestType()) {
+                            case Request.TYPE_INSERT:
+                                break;
+                            case Request.TYPE_DELETE:
+                                break;
+                            case Request.TYPE_CHAT:
+                                break;
+                            case Request.TYPE_NICK:
+                                String newNick = r.getData();
+                                r.getOrigin().setNick(newNick);
+                                break;
+                            default:
+                                break;
                         }
                     }
                 }
