@@ -32,11 +32,7 @@ public class RequestTest {
     @After
     public void tearDown() {
     }
-    // TODO add test methods here.
-    // The methods must be annotated with annotation @Test. For example:
-    //
-    // @Test
-    // public void hello() {}
+    
     @Test
     public void requestStringTest() {
         Request r = new Request(Request.TYPE_INSERT, 694, "a");
