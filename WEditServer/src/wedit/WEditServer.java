@@ -9,11 +9,12 @@ package wedit;
  * @author Kevin Wang
  */
 public class WEditServer {
+    public static StringBuffer document = new StringBuffer();
 
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
+        new ServerFrame().setVisible(true);
     }
 }
