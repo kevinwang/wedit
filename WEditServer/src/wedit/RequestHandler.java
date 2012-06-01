@@ -14,11 +14,20 @@ import wedit.net.Request;
  * @author Kevin Wang
  */
 public class RequestHandler {
+    private static RequestHandler instance;
+    
     private Queue<BacktracedRequest> requests;
     private Thread handlerThread;
     private final Object lock = new Object();
     
-    public RequestHandler() {
+    public static RequestHandler getInstance() {
+        if (instance == null) {
+            instance = new RequestHandler();
+        }
+        return instance;
+    }
+    
+    private RequestHandler() {
         requests = new LinkedList<BacktracedRequest>();
         handlerThread = new Thread(new Runnable() {
 
@@ -32,8 +41,10 @@ public class RequestHandler {
                         }
                         switch (r.getRequestType()) {
                             case Request.TYPE_INSERT:
+                                WEditServer.document.insert(r.getIndex(), r.getData());
                                 break;
                             case Request.TYPE_DELETE:
+                                WEditServer.document.deleteCharAt(r.getIndex());
                                 break;
                             case Request.TYPE_CHAT:
                                 break;
@@ -51,7 +62,7 @@ public class RequestHandler {
         });
     }
     
-    public void startHandlerThread() {
+    public void start() {
         handlerThread.start();
     }
     

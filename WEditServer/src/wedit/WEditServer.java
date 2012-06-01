@@ -4,12 +4,19 @@
  */
 package wedit;
 
+import wedit.net.SessionManager;
+
 /**
  *
  * @author Kevin Wang
  */
 public class WEditServer {
     public static StringBuffer document = new StringBuffer();
+    
+    public WEditServer() {
+        RequestHandler.getInstance().start();
+        SessionManager.getInstance().start();
+    }
 
     /**
      * @param args the command line arguments
