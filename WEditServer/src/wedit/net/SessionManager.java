@@ -6,8 +6,10 @@ package wedit.net;
 
 import java.io.IOException;
 import java.net.ServerSocket;
+import java.net.Socket;
 import java.util.ArrayList;
 import wedit.RequestHandler;
+import wedit.ServerFrame;
 
 /**
  *
@@ -43,7 +45,13 @@ public class SessionManager {
             public void run() {
                 try {
                     synchronized (lock) {
-                        activeSessions.add(new Session(server.accept()));
+                        Socket s = server.accept();
+                        activeSessions.add(new Session(s));
+                        String[] str = new String[activeSessions.size()];
+                        for (int i = 0; i < str.length; i++) {
+                            str[i] = activeSessions.get(i).getNick();
+                        }
+                        ServerFrame.getInstance().updateSessionsList(str);
                     }
                 } catch (IOException e) {
                 }
@@ -60,13 +68,13 @@ public class SessionManager {
             public void run() {
                 acceptNextSession();
                 while (true) {
-                    for (Session s : activeSessions) {
-                        try {
-                            if (s.ready()) {
-                                RequestHandler.getInstance().addRequest(new BacktracedRequest(s.readLine(), s));
-                            }
-                        } catch (IOException e) {
-                            synchronized (lock) {
+                    synchronized (lock) {
+                        for (Session s : activeSessions) {
+                            try {
+                                if (s.ready()) {
+                                    RequestHandler.getInstance().addRequest(new BacktracedRequest(s.readLine(), s));
+                                }
+                            } catch (IOException e) {
                                 activeSessions.remove(s);
                             }
                         }
@@ -79,5 +87,9 @@ public class SessionManager {
     
     public Object getLock() {
         return lock;
+    }
+    
+    public int getNumActiveSessions() {
+        return activeSessions.size();
     }
 }

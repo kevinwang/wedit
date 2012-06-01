@@ -4,17 +4,33 @@
  */
 package wedit;
 
+import java.awt.Component;
+
 /**
  *
  * @author Kevin Wang
  */
 public class ServerFrame extends javax.swing.JFrame {
+    private static ServerFrame instance;
+    
+    public static ServerFrame getInstance() {
+        if (instance == null) {
+            instance = new ServerFrame();
+        }
+        return instance;
+    }
 
     /**
      * Creates new form ServerFrame
      */
-    public ServerFrame() {
+    private ServerFrame() {
+        WEditServer server = new WEditServer();
         initComponents();
+    }
+    
+    public void updateSessionsList(Object[] sessionNicks) {
+        sessionsList.removeAll();
+        sessionsList.setListData(sessionNicks);
     }
 
     /**

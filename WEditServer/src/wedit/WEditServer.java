@@ -22,6 +22,6 @@ public class WEditServer {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        new ServerFrame().setVisible(true);
+        ServerFrame.getInstance().setVisible(true);
     }
 }
