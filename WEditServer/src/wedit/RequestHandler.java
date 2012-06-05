@@ -29,6 +29,9 @@ public class RequestHandler {
     
     private RequestHandler() {
         requests = new LinkedList<BacktracedRequest>();
+    }
+    
+    public void start() {
         handlerThread = new Thread(new Runnable() {
 
             @Override
@@ -60,9 +63,7 @@ public class RequestHandler {
             }
             
         });
-    }
-    
-    public void start() {
+        handlerThread.setPriority(Thread.MAX_PRIORITY);
         handlerThread.start();
     }
     
