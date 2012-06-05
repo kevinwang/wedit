@@ -49,7 +49,7 @@ public class SessionManagerTest {
             }
             s.write(new Request(Request.TYPE_NICK, 0, "Kevin"));
             try {
-                Thread.sleep(10);
+                Thread.sleep(100);
             } catch (InterruptedException e) {
             }
             assertEquals(1, SessionManager.getInstance().getNumActiveSessions());
@@ -63,6 +63,11 @@ public class SessionManagerTest {
             } catch (InterruptedException e) {
             }
             Session t = new Session(new Socket("127.0.0.1", 23343));
+            try {
+                Thread.sleep(2000);
+            } catch (InterruptedException e) {
+            }
+            s.write(new Request(Request.TYPE_NICK, 0, "Shan"));
             try {
                 Thread.sleep(10000);
             } catch (InterruptedException e) {

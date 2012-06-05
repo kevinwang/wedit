@@ -39,7 +39,7 @@ public class SessionManager {
     }
     
     private void acceptNextSession() {
-        new Thread(new Runnable() {
+        Thread t = new Thread(new Runnable() {
 
             @Override
             public void run() {
@@ -58,7 +58,9 @@ public class SessionManager {
                 acceptNextSession();
             }
             
-        }).start();
+        });
+        t.setPriority(Thread.MIN_PRIORITY);
+        t.start();
     }
     
     public void start() {
