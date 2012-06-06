@@ -47,11 +47,6 @@ public class SessionManager {
                     synchronized (lock) {
                         Socket s = server.accept();
                         activeSessions.add(new Session(s));
-                        String[] str = new String[activeSessions.size()];
-                        for (int i = 0; i < str.length; i++) {
-                            str[i] = activeSessions.get(i).getNick();
-                        }
-                        ServerFrame.getInstance().updateSessionsList(str);
                     }
                 } catch (IOException e) {
                 }

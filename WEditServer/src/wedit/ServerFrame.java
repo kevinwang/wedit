@@ -27,11 +27,6 @@ public class ServerFrame extends javax.swing.JFrame {
         WEditServer server = new WEditServer();
         initComponents();
     }
-    
-    public void updateSessionsList(Object[] sessionNicks) {
-        sessionsList.removeAll();
-        sessionsList.setListData(sessionNicks);
-    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -43,68 +38,31 @@ public class ServerFrame extends javax.swing.JFrame {
     private void initComponents() {
 
         inputField = new javax.swing.JTextField();
-        consolePanel = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         consolePane = new javax.swing.JTextPane();
-        sessionsPanel = new javax.swing.JPanel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        sessionsList = new javax.swing.JList();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("WEdit Server");
 
-        consolePanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Console"));
-
         consolePane.setEditable(false);
         jScrollPane1.setViewportView(consolePane);
-
-        javax.swing.GroupLayout consolePanelLayout = new javax.swing.GroupLayout(consolePanel);
-        consolePanel.setLayout(consolePanelLayout);
-        consolePanelLayout.setHorizontalGroup(
-            consolePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 410, Short.MAX_VALUE)
-        );
-        consolePanelLayout.setVerticalGroup(
-            consolePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1)
-        );
-
-        sessionsPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Active Sessions"));
-
-        jScrollPane2.setViewportView(sessionsList);
-
-        javax.swing.GroupLayout sessionsPanelLayout = new javax.swing.GroupLayout(sessionsPanel);
-        sessionsPanel.setLayout(sessionsPanelLayout);
-        sessionsPanelLayout.setHorizontalGroup(
-            sessionsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 142, Short.MAX_VALUE)
-        );
-        sessionsPanelLayout.setVerticalGroup(
-            sessionsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 315, Short.MAX_VALUE)
-        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(consolePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(sessionsPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(inputField))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane1)
+                    .addComponent(inputField, javax.swing.GroupLayout.DEFAULT_SIZE, 582, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(consolePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(sessionsPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 338, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(inputField, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -156,11 +114,7 @@ public class ServerFrame extends javax.swing.JFrame {
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextPane consolePane;
-    private javax.swing.JPanel consolePanel;
     private javax.swing.JTextField inputField;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JList sessionsList;
-    private javax.swing.JPanel sessionsPanel;
     // End of variables declaration//GEN-END:variables
 }
