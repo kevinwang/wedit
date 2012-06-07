@@ -39,13 +39,15 @@ public class ServerFrame extends javax.swing.JFrame {
 
         inputField = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
-        consolePane = new javax.swing.JTextPane();
+        consoleArea = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("WEdit Server");
 
-        consolePane.setEditable(false);
-        jScrollPane1.setViewportView(consolePane);
+        consoleArea.setColumns(20);
+        consoleArea.setEditable(false);
+        consoleArea.setRows(5);
+        jScrollPane1.setViewportView(consoleArea);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -54,13 +56,13 @@ public class ServerFrame extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane1)
-                    .addComponent(inputField, javax.swing.GroupLayout.DEFAULT_SIZE, 582, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 582, Short.MAX_VALUE)
+                    .addComponent(inputField, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 582, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 338, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -113,7 +115,7 @@ public class ServerFrame extends javax.swing.JFrame {
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextPane consolePane;
+    private javax.swing.JTextArea consoleArea;
     private javax.swing.JTextField inputField;
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
