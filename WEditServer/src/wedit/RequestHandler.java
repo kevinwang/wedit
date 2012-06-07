@@ -43,7 +43,6 @@ public class RequestHandler {
                     } catch (InterruptedException e) {
                     }
                     if (!requests.isEmpty()) {
-                        System.out.println("not empty");
                         BacktracedRequest r;
                         synchronized (lock) {
                             r = requests.remove();
