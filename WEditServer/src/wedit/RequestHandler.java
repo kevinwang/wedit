@@ -8,6 +8,7 @@ import java.util.LinkedList;
 import java.util.Queue;
 import wedit.net.BacktracedRequest;
 import wedit.net.Request;
+import wedit.net.SessionManager;
 
 /**
  *
@@ -37,7 +38,12 @@ public class RequestHandler {
             @Override
             public void run() {
                 while (true) {
+                    try {
+                        Thread.sleep(1); // Magical statement that makes the loop work
+                    } catch (InterruptedException e) {
+                    }
                     if (!requests.isEmpty()) {
+                        System.out.println("not empty");
                         BacktracedRequest r;
                         synchronized (lock) {
                             r = requests.remove();
@@ -50,10 +56,13 @@ public class RequestHandler {
                                 WEditServer.document.deleteCharAt(r.getIndex());
                                 break;
                             case Request.TYPE_CHAT:
+                                SessionManager.getInstance().broadcastMessage(r);
                                 break;
                             case Request.TYPE_NICK:
+                                String oldNick = r.getOrigin().toString();
                                 String newNick = r.getData();
                                 r.getOrigin().setNick(newNick);
+                                ServerFrame.getInstance().consoleWrite(oldNick + " is now known as " + newNick + ".");
                                 break;
                             default:
                                 break;

@@ -48,6 +48,7 @@ public class SessionManagerTest {
             } catch (InterruptedException e) {
             }
             s.write(new Request(Request.TYPE_NICK, 0, "Kevin"));
+            s.write((new Request(Request.TYPE_CHAT, 0, "hello")));
             try {
                 Thread.sleep(100);
             } catch (InterruptedException e) {
@@ -74,7 +75,7 @@ public class SessionManagerTest {
             }
             assertEquals(2, SessionManager.getInstance().getNumActiveSessions());
             try {
-                Thread.sleep(10000);
+                Thread.sleep(3000);
             } catch (InterruptedException e) {
             }
         } catch (IOException e) {

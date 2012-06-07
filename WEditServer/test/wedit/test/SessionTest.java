@@ -179,7 +179,7 @@ public class SessionTest {
             
             Request receivedRequest = new Request(reader.readLine());
             session.setNick(receivedRequest.getData());
-            assertEquals("Session nickname changes properly", newNick, session);
+            assertEquals("Session nickname changes properly", newNick, session.toString());
             
             System.out.println(session);
             

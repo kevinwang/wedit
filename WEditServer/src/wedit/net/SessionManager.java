@@ -88,6 +88,14 @@ public class SessionManager {
         return lock;
     }
     
+    public void broadcastMessage(BacktracedRequest r) {
+        for (Session s : activeSessions) {
+            s.write(new Request(Request.TYPE_CHAT, 0, "<" + r.getOrigin() + "> " + r.getData()));
+            ServerFrame.getInstance().consoleWrite("[CHAT] <" + r.getOrigin() + "> " + r.getData());
+            
+        }
+    }
+    
     public int getNumActiveSessions() {
         return activeSessions.size();
     }
