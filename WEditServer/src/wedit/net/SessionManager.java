@@ -46,7 +46,9 @@ public class SessionManager {
                 try {
                     synchronized (lock) {
                         Socket s = server.accept();
-                        activeSessions.add(new Session(s));
+                        Session ses = new Session(s);
+                        activeSessions.add(ses);
+                        ServerFrame.getInstance().consoleWrite(ses + " has joined the document.");
                     }
                 } catch (IOException e) {
                 }

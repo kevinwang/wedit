@@ -28,6 +28,11 @@ public class ServerFrame extends javax.swing.JFrame {
         initComponents();
         inputField.requestFocusInWindow();
     }
+    
+    public void consoleWrite(String s) {
+        String text = consoleArea.getText();
+        consoleArea.setText(text + (text.equals("") ? "" : "\n") + s);
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.

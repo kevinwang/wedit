@@ -73,6 +73,10 @@ public class SessionManagerTest {
             } catch (InterruptedException e) {
             }
             assertEquals(2, SessionManager.getInstance().getNumActiveSessions());
+            try {
+                Thread.sleep(10000);
+            } catch (InterruptedException e) {
+            }
         } catch (IOException e) {
         }
     }
