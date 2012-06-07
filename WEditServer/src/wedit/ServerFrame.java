@@ -26,6 +26,7 @@ public class ServerFrame extends javax.swing.JFrame {
     private ServerFrame() {
         WEditServer server = new WEditServer();
         initComponents();
+        inputField.requestFocusInWindow();
     }
 
     /**
