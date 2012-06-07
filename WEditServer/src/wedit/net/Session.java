@@ -53,7 +53,7 @@ public class Session {
         this.nickname = nick;
     }
 
-    public String getNick() {
+    public String toString() {
         return nickname;
     }
 }

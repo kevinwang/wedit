@@ -68,7 +68,7 @@ public class SessionTest {
             while (socket == null);
             reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             
-            System.out.println(session.getNick());
+            System.out.println(session);
             
             session.write(request);
             while (!reader.ready());
@@ -101,7 +101,7 @@ public class SessionTest {
             while (socket == null);
             reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             
-            System.out.println(session.getNick());
+            System.out.println(session);
             
             session.write(request);
             while (!reader.ready());
@@ -137,7 +137,7 @@ public class SessionTest {
             while (socket == null);
             reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             
-            System.out.println(session.getNick());
+            System.out.println(session);
             
             session.write(request);
             while (!reader.ready());
@@ -172,16 +172,16 @@ public class SessionTest {
             while (socket == null);
             reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             
-            System.out.println(session.getNick());
+            System.out.println(session);
             
             session.write(nickRequest);
             while (!reader.ready());
             
             Request receivedRequest = new Request(reader.readLine());
             session.setNick(receivedRequest.getData());
-            assertEquals("Session nickname changes properly", newNick, session.getNick());
+            assertEquals("Session nickname changes properly", newNick, session);
             
-            System.out.println(session.getNick());
+            System.out.println(session);
             
             socket.close();
             serverSocket.close();
