@@ -35,7 +35,7 @@ public class SessionManager {
         try {
             server = new ServerSocket(23343);
         } catch (IOException e) {
-            // TODO: Report errors to console output
+            ServerFrame.getInstance().consoleWrite("Error constructing server socket: " + e.getMessage());
         }
         activeSessions = Collections.synchronizedSet(new HashSet<Session>());
     }
