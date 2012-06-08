@@ -44,17 +44,17 @@ public class SessionManagerTest {
         try {
             Session s = new Session(new Socket("localhost", 23343));
             delay();
-            s.write(new Request(Request.TYPE_NICK, 0, "Kevin"));
+            s.write(new Request(Request.TYPE_NICK, "Kevin"));
             delay();
             assertEquals(1, SessionManager.getInstance().getNumActiveSessions());
             delay();
             Session t = new Session(new Socket("127.0.0.1", 23343));
             delay();
-            t.write(new Request(Request.TYPE_NICK, 0, "Shan"));
+            t.write(new Request(Request.TYPE_NICK, "Shan"));
             delay();
-            s.write((new Request(Request.TYPE_CHAT, 0, "hello")));
+            s.write((new Request(Request.TYPE_CHAT, "hello")));
             delay();
-            t.write((new Request(Request.TYPE_CHAT, 0, "sup")));
+            t.write((new Request(Request.TYPE_CHAT, "sup")));
             assertEquals(2, SessionManager.getInstance().getNumActiveSessions());
             delay();
             // Uncomment to see console output

@@ -24,9 +24,8 @@ public class Request {
     private String data;
     
     /**
-     * Constructs a request. If a particular parameter is not relevant to the
-     * type of request being constructed, its value is irrelevant.
-     * @param requestType Type of request (insert, delete, chat, etc.).
+     * Constructs a request with an index and data.
+     * @param requestType Type of request.
      * @param index Index at which to perform insertion/deletion.
      * @param data If insert request, string to be inserted. If chat request,chat message.
      */
@@ -34,6 +33,24 @@ public class Request {
         this.requestType = requestType;
         this.index = index;
         this.data = data;
+    }
+    
+    /**
+     * Constructs a request without an index.
+     * @param data If insert request, string to be inserted. If chat request,chat message.
+     */
+    public Request(char requestType, String data) {
+        this.requestType = requestType;
+        this.data = data;
+    }
+    
+    /**
+     * Constructs a request without data.
+     * @param index Index at which to perform insertion/deletion.
+     */
+    public Request(char requestType, int index) {
+        this.requestType = requestType;
+        this.index = index;
     }
     
     /**
