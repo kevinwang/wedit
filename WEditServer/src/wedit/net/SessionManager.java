@@ -7,7 +7,10 @@ package wedit.net;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.ArrayList;
+import java.util.Collections;
+import java.util.ConcurrentModificationException;
+import java.util.HashSet;
+import java.util.Set;
 import wedit.RequestHandler;
 import wedit.ServerFrame;
 
@@ -19,8 +22,7 @@ public class SessionManager {
     private static SessionManager instance;
     
     private ServerSocket server;
-    private ArrayList<Session> activeSessions;
-    private final Object lock = new Object();
+    private Set<Session> activeSessions;
     
     public static SessionManager getInstance() {
         if (instance == null) {
@@ -35,7 +37,7 @@ public class SessionManager {
         } catch (IOException e) {
             // TODO: Report errors to console output
         }
-        activeSessions = new ArrayList<Session>();
+        activeSessions = Collections.synchronizedSet(new HashSet<Session>());
     }
     
     private void acceptNextSession() {
@@ -44,12 +46,10 @@ public class SessionManager {
             @Override
             public void run() {
                 try {
-                    synchronized (lock) {
-                        Socket s = server.accept();
-                        Session ses = new Session(s);
-                        activeSessions.add(ses);
-                        ServerFrame.getInstance().consoleWrite(ses + " has joined the document.");
-                    }
+                    Socket s = server.accept();
+                    Session ses = new Session(s);
+                    activeSessions.add(ses);
+                    ServerFrame.getInstance().consoleWrite(ses + " has opened the document.");
                 } catch (IOException e) {
                 }
                 acceptNextSession();
@@ -67,7 +67,7 @@ public class SessionManager {
             public void run() {
                 acceptNextSession();
                 while (true) {
-                    synchronized (lock) {
+                    try {
                         for (Session s : activeSessions) {
                             try {
                                 if (s.ready()) {
@@ -75,25 +75,22 @@ public class SessionManager {
                                 }
                             } catch (IOException e) {
                                 activeSessions.remove(s);
+                                ServerFrame.getInstance().consoleWrite(s + " has left.");
                             }
                         }
+                    } catch (ConcurrentModificationException e) {
                     }
                 }
             }
-            
+
         }).start();
-    }
-    
-    public Object getLock() {
-        return lock;
     }
     
     public void broadcastMessage(BacktracedRequest r) {
         for (Session s : activeSessions) {
             s.write(new Request(Request.TYPE_CHAT, 0, "<" + r.getOrigin() + "> " + r.getData()));
-            ServerFrame.getInstance().consoleWrite("[CHAT] <" + r.getOrigin() + "> " + r.getData());
-            
         }
+        ServerFrame.getInstance().consoleWrite("[CHAT] <" + r.getOrigin() + "> " + r.getData());
     }
     
     public int getNumActiveSessions() {

@@ -6,8 +6,8 @@ package wedit.test;
 
 import java.io.IOException;
 import java.net.Socket;
+import static org.junit.Assert.assertEquals;
 import org.junit.*;
-import static org.junit.Assert.*;
 import wedit.ServerFrame;
 import wedit.net.Request;
 import wedit.net.Session;
@@ -43,42 +43,33 @@ public class SessionManagerTest {
         ServerFrame.getInstance().setVisible(true);
         try {
             Session s = new Session(new Socket("localhost", 23343));
-            try {
-                Thread.sleep(100);
-            } catch (InterruptedException e) {
-            }
+            delay();
             s.write(new Request(Request.TYPE_NICK, 0, "Kevin"));
-            s.write((new Request(Request.TYPE_CHAT, 0, "hello")));
-            try {
-                Thread.sleep(100);
-            } catch (InterruptedException e) {
-            }
+            delay();
             assertEquals(1, SessionManager.getInstance().getNumActiveSessions());
-            try {
-                Thread.sleep(100);
-            } catch (InterruptedException e) {
-            }
-            assertEquals(1, SessionManager.getInstance().getNumActiveSessions());
-            try {
-                Thread.sleep(100);
-            } catch (InterruptedException e) {
-            }
+            delay();
             Session t = new Session(new Socket("127.0.0.1", 23343));
-            try {
-                Thread.sleep(100);
-            } catch (InterruptedException e) {
-            }
-            s.write(new Request(Request.TYPE_NICK, 0, "Shan"));
-            try {
-                Thread.sleep(100);
-            } catch (InterruptedException e) {
-            }
+            delay();
+            t.write(new Request(Request.TYPE_NICK, 0, "Shan"));
+            delay();
+            s.write((new Request(Request.TYPE_CHAT, 0, "hello")));
+            delay();
+            t.write((new Request(Request.TYPE_CHAT, 0, "sup")));
             assertEquals(2, SessionManager.getInstance().getNumActiveSessions());
-            try {
-                Thread.sleep(3000);
-            } catch (InterruptedException e) {
-            }
+            delay();
+            // Uncomment to see console output
+//            try {
+//                Thread.sleep(3000);
+//            } catch (InterruptedException e) {
+//            }
         } catch (IOException e) {
+        }
+    }
+    
+    public void delay() {
+        try {
+            Thread.sleep(100);
+        } catch (InterruptedException e) {
         }
     }
 }
