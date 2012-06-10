@@ -30,6 +30,26 @@ public class WEdit {
             session.write(new Request(Request.TYPE_NICK, nick));
         }
         ClientFrame.getInstance().setVisible(true);
+        RequestHandler.getInstance().start();
+    }
+    
+    public void start() {
+        new Thread(new Runnable() {
+
+            @Override
+            public void run() {
+                while (true) {
+                    try {
+                        if (session.ready()) {
+                            System.out.println("asdf");
+                            RequestHandler.getInstance().addRequest(new Request(session.readLine()));
+                        }
+                    } catch (IOException e) {
+                    }
+                }
+            }
+            
+        }).start();
     }
 
     /**

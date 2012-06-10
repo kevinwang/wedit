@@ -99,6 +99,7 @@ public class ConnectDialog extends javax.swing.JFrame {
 
     private void submitButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_submitButtonMouseClicked
         WEdit wedit = new WEdit(addressField.getText(), nickField.getText());
+        wedit.start();
         setVisible(false);
         dispose();
     }//GEN-LAST:event_submitButtonMouseClicked

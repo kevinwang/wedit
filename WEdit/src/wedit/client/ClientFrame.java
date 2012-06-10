@@ -24,6 +24,11 @@ public class ClientFrame extends javax.swing.JFrame {
     private ClientFrame() {
         initComponents();
     }
+    
+    public void chatWrite(String s) {
+        String text = chatArea.getText();
+        chatArea.setText(text + (text.equals("") ? "" : "\n") + s);
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
