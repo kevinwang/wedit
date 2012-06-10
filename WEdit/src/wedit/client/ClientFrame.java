@@ -53,12 +53,16 @@ public class ClientFrame extends javax.swing.JFrame {
         setTitle("WEdit");
 
         documentArea.setColumns(20);
+        documentArea.setLineWrap(true);
         documentArea.setRows(5);
+        documentArea.setWrapStyleWord(true);
         jScrollPane2.setViewportView(documentArea);
 
         chatArea.setColumns(10);
         chatArea.setEditable(false);
+        chatArea.setLineWrap(true);
         chatArea.setRows(5);
+        chatArea.setWrapStyleWord(true);
         jScrollPane5.setViewportView(chatArea);
 
         chatField.addActionListener(new java.awt.event.ActionListener() {

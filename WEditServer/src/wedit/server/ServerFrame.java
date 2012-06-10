@@ -58,7 +58,9 @@ public class ServerFrame extends javax.swing.JFrame {
 
         consoleArea.setColumns(20);
         consoleArea.setEditable(false);
+        consoleArea.setLineWrap(true);
         consoleArea.setRows(5);
+        consoleArea.setWrapStyleWord(true);
         jScrollPane1.setViewportView(consoleArea);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
