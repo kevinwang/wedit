@@ -3,6 +3,7 @@
  * and open the template in the editor.
  */
 package wedit.client;
+import java.awt.event.KeyEvent;
 import wedit.net.Request;
 /**
  *
@@ -113,7 +114,7 @@ public class ClientFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_chatFieldActionPerformed
 
     private void documentAreaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_documentAreaKeyTyped
-        if(evt.getKeyCode()==8){
+        if(evt.getKeyChar()==KeyEvent.VK_BACK_SPACE){
             RequestHandler.getInstance().addRequest(new Request('d',evt.getKeyLocation()));
         }else{
             RequestHandler.getInstance().addRequest(new Request('i',evt.getKeyLocation(),Character.toString(evt.getKeyChar())));
