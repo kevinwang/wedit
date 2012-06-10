@@ -49,10 +49,18 @@ public class RequestHandler {
                         }
                         switch (r.getRequestType()) {
                             case Request.TYPE_INSERT:
-                                WEditServer.document.insert(r.getIndex(), r.getData());
+                                try {
+                                    WEditServer.document.insert(r.getIndex(), r.getData());
+                                } catch (StringIndexOutOfBoundsException e) {
+                                    ServerFrame.getInstance().consoleWrite("Insert error: " + e.getMessage());
+                                }
                                 break;
                             case Request.TYPE_DELETE:
-                                WEditServer.document.deleteCharAt(r.getIndex());
+                                try {
+                                    WEditServer.document.deleteCharAt(r.getIndex());
+                                } catch (StringIndexOutOfBoundsException e) {
+                                    ServerFrame.getInstance().consoleWrite("Delete error: " + e.getMessage());
+                                }
                                 break;
                             case Request.TYPE_CHAT:
                                 SessionManager.getInstance().broadcastMessage(r);
