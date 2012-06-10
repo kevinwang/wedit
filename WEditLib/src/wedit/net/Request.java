@@ -19,6 +19,11 @@ public class Request {
      */
     private static final String DELIMITER = Character.toString((char)31);
     
+    /**
+     * ASCII record separator. Special character used here to denote newlines.
+     */
+    public static final String NEWLINE = Character.toString((char)30);
+    
     private char requestType;
     private int index;
     private String data;

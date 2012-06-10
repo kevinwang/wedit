@@ -50,7 +50,11 @@ public class RequestHandler {
                         switch (r.getRequestType()) {
                             case Request.TYPE_INSERT:
                                 try {
-                                    WEditServer.document.insert(r.getIndex(), r.getData());
+                                    if (r.getData().equals(Request.NEWLINE)) {
+                                        WEditServer.document.insert(r.getIndex(), "\n");
+                                    } else {
+                                        WEditServer.document.insert(r.getIndex(), r.getData());
+                                    }
                                 } catch (StringIndexOutOfBoundsException e) {
                                     ServerFrame.getInstance().consoleWrite("Insert error: " + e.getMessage());
                                 }

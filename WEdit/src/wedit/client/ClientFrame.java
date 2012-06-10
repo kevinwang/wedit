@@ -117,7 +117,7 @@ public class ClientFrame extends javax.swing.JFrame {
         if(evt.getKeyChar()==KeyEvent.VK_BACK_SPACE){
             WEdit.getInstance().makeRequest(new Request(Request.TYPE_DELETE,documentArea.getCaret().getDot()));
         } else if (evt.getKeyChar() == KeyEvent.VK_ENTER) {
-            WEdit.getInstance().makeRequest(new Request(Request.TYPE_INSERT,documentArea.getCaret().getDot() - 1,Character.toString((char)13)));
+            WEdit.getInstance().makeRequest(new Request(Request.TYPE_INSERT,documentArea.getCaret().getDot() - 1,Request.NEWLINE));
         } else {
             WEdit.getInstance().makeRequest(new Request(Request.TYPE_INSERT,documentArea.getCaret().getDot(),Character.toString(evt.getKeyChar())));
         }
