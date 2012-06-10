@@ -58,6 +58,7 @@ public class RequestHandler {
                                 } catch (StringIndexOutOfBoundsException e) {
                                     ServerFrame.getInstance().consoleWrite("Insert error: " + e.getMessage());
                                 }
+                                SessionManager.getInstance().broadcastRequest(r);
                                 ServerFrame.getInstance().consoleWrite(WEditServer.document.toString());
                                 break;
                             case Request.TYPE_DELETE:
@@ -66,6 +67,7 @@ public class RequestHandler {
                                 } catch (StringIndexOutOfBoundsException e) {
                                     ServerFrame.getInstance().consoleWrite("Delete error: " + e.getMessage());
                                 }
+                                SessionManager.getInstance().broadcastRequest(r);
                                 ServerFrame.getInstance().consoleWrite(WEditServer.document.toString());
                                 break;
                             case Request.TYPE_CHAT:

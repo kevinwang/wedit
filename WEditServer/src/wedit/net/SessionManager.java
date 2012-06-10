@@ -100,6 +100,14 @@ public class SessionManager {
         ServerFrame.getInstance().consoleWrite("[SERVER] " + str);
     }
     
+    public void broadcastRequest(BacktracedRequest r) {
+        for (Session s : activeSessions) {
+            if (!s.equals(r.getOrigin())) {
+                s.write(r);
+            }
+        }
+    }
+    
     public int getNumActiveSessions() {
         return activeSessions.size();
     }

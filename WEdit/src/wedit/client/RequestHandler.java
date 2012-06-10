@@ -47,8 +47,20 @@ public class RequestHandler {
                         }
                         switch (r.getRequestType()) {
                             case Request.TYPE_INSERT:
+                                try {
+                                    if (r.getData().equals(Request.NEWLINE)) {
+                                        ClientFrame.getInstance().insert(r.getIndex(), "\n");
+                                    } else {
+                                        ClientFrame.getInstance().insert(r.getIndex(), r.getData());
+                                    }
+                                } catch (StringIndexOutOfBoundsException e) {
+                                }
                                 break;
                             case Request.TYPE_DELETE:
+                                try {
+                                    ClientFrame.getInstance().delete(r.getIndex());
+                                } catch (StringIndexOutOfBoundsException e) {
+                                }
                                 break;
                             case Request.TYPE_CHAT:
                                 ClientFrame.getInstance().chatWrite(r.getData());

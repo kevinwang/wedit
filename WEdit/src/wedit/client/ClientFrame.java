@@ -32,6 +32,22 @@ public class ClientFrame extends javax.swing.JFrame {
         String text = chatArea.getText();
         chatArea.append((text.equals("") ? "" : "\n") + s);
     }
+    
+    public void insert(int index, String data) {
+        int caretPos = documentArea.getCaretPosition();
+        StringBuilder s = new StringBuilder(documentArea.getText());
+        s.insert(index, data);
+        documentArea.setText(s.toString());
+        documentArea.setCaretPosition(caretPos);
+    }
+    
+    public void delete(int index) {
+        int caretPos = documentArea.getCaretPosition();
+        StringBuilder s = new StringBuilder(documentArea.getText());
+        s.deleteCharAt(index);
+        documentArea.setText(s.toString());
+        documentArea.setCaretPosition(caretPos);
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -116,14 +132,14 @@ public class ClientFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_chatFieldActionPerformed
 
     private void documentAreaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_documentAreaKeyTyped
-        if(evt.getKeyChar()==KeyEvent.VK_BACK_SPACE){
-            WEdit.getInstance().makeRequest(new Request(Request.TYPE_DELETE,documentArea.getCaret().getDot()));
+        if (evt.getKeyChar() == KeyEvent.VK_BACK_SPACE || evt.getKeyChar() == KeyEvent.VK_DELETE) {
+            WEdit.getInstance().makeRequest(new Request(Request.TYPE_DELETE, documentArea.getCaretPosition()));
         } else if (evt.getKeyChar() == KeyEvent.VK_ENTER) {
-            WEdit.getInstance().makeRequest(new Request(Request.TYPE_INSERT,documentArea.getCaret().getDot() - 1,Request.NEWLINE));
+            WEdit.getInstance().makeRequest(new Request(Request.TYPE_INSERT, documentArea.getCaretPosition() - 1, Request.NEWLINE));
         } else if (evt.getKeyChar() == KeyEvent.VK_TAB) {
-            WEdit.getInstance().makeRequest(new Request(Request.TYPE_INSERT,documentArea.getCaret().getDot() - 1,Character.toString(evt.getKeyChar())));
+            WEdit.getInstance().makeRequest(new Request(Request.TYPE_INSERT, documentArea.getCaretPosition() - 1, Character.toString(evt.getKeyChar())));
         } else {
-            WEdit.getInstance().makeRequest(new Request(Request.TYPE_INSERT,documentArea.getCaret().getDot(),Character.toString(evt.getKeyChar())));
+            WEdit.getInstance().makeRequest(new Request(Request.TYPE_INSERT, documentArea.getCaretPosition(), Character.toString(evt.getKeyChar())));
         }
     }//GEN-LAST:event_documentAreaKeyTyped
 
