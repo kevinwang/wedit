@@ -4,6 +4,7 @@
  */
 package wedit.client;
 import java.awt.event.KeyEvent;
+import javax.swing.text.DefaultCaret;
 import wedit.net.Request;
 /**
  *
@@ -24,11 +25,12 @@ public class ClientFrame extends javax.swing.JFrame {
      */
     private ClientFrame() {
         initComponents();
+        ((DefaultCaret)chatArea.getCaret()).setUpdatePolicy(DefaultCaret.ALWAYS_UPDATE);
     }
     
     public void chatWrite(String s) {
         String text = chatArea.getText();
-        chatArea.setText(text + (text.equals("") ? "" : "\n") + s);
+        chatArea.append((text.equals("") ? "" : "\n") + s);
     }
 
     /**

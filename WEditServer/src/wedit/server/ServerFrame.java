@@ -4,6 +4,7 @@
  */
 package wedit.server;
 
+import javax.swing.text.DefaultCaret;
 import wedit.net.SessionManager;
 
 /**
@@ -27,11 +28,12 @@ public class ServerFrame extends javax.swing.JFrame {
         WEditServer server = new WEditServer();
         initComponents();
         inputField.requestFocusInWindow();
+        ((DefaultCaret)consoleArea.getCaret()).setUpdatePolicy(DefaultCaret.ALWAYS_UPDATE);
     }
     
     public void consoleWrite(String s) {
         String text = consoleArea.getText();
-        consoleArea.setText(text + (text.equals("") ? "" : "\n") + s);
+        consoleArea.append((text.equals("") ? "" : "\n") + s);
     }
 
     /**
