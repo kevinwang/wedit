@@ -53,6 +53,7 @@ public class Session {
         this.nickname = nick;
     }
 
+    @Override
     public String toString() {
         return nickname;
     }
