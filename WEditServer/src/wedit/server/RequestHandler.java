@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package wedit;
+package wedit.server;
 
 import java.util.LinkedList;
 import java.util.Queue;

@@ -8,7 +8,7 @@
  *
  * Created on Jun 9, 2012, 9:30:26 PM
  */
-package wedit;
+package wedit.client;
 
 /**
  *

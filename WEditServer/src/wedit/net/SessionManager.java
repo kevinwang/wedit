@@ -11,8 +11,8 @@ import java.util.Collections;
 import java.util.ConcurrentModificationException;
 import java.util.HashSet;
 import java.util.Set;
-import wedit.RequestHandler;
-import wedit.ServerFrame;
+import wedit.server.RequestHandler;
+import wedit.server.ServerFrame;
 
 /**
  *

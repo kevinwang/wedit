@@ -8,7 +8,7 @@ import java.io.IOException;
 import java.net.Socket;
 import static org.junit.Assert.assertEquals;
 import org.junit.*;
-import wedit.ServerFrame;
+import wedit.server.ServerFrame;
 import wedit.net.Request;
 import wedit.net.Session;
 import wedit.net.SessionManager;
