@@ -38,7 +38,11 @@ public class ClientFrame extends javax.swing.JFrame {
         StringBuilder s = new StringBuilder(documentArea.getText());
         s.insert(index, data);
         documentArea.setText(s.toString());
-        documentArea.setCaretPosition(caretPos);
+        if (caretPos > index) {
+            documentArea.setCaretPosition(caretPos + data.length());
+        } else {
+            documentArea.setCaretPosition(caretPos);
+        }
     }
     
     public void delete(int index) {
@@ -46,7 +50,11 @@ public class ClientFrame extends javax.swing.JFrame {
         StringBuilder s = new StringBuilder(documentArea.getText());
         s.deleteCharAt(index);
         documentArea.setText(s.toString());
-        documentArea.setCaretPosition(caretPos);
+        if (caretPos > documentArea.getText().length()) {
+            documentArea.setCaretPosition(documentArea.getText().length());
+        } else {
+            documentArea.setCaretPosition(caretPos);
+        }
     }
 
     /**
