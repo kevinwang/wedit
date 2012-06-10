@@ -59,7 +59,6 @@ public class RequestHandler {
                                     ServerFrame.getInstance().consoleWrite("Insert error: " + e.getMessage());
                                 }
                                 SessionManager.getInstance().broadcastRequest(r);
-                                ServerFrame.getInstance().consoleWrite(WEditServer.document.toString());
                                 break;
                             case Request.TYPE_DELETE:
                                 try {
@@ -68,7 +67,6 @@ public class RequestHandler {
                                     ServerFrame.getInstance().consoleWrite("Delete error: " + e.getMessage());
                                 }
                                 SessionManager.getInstance().broadcastRequest(r);
-                                ServerFrame.getInstance().consoleWrite(WEditServer.document.toString());
                                 break;
                             case Request.TYPE_CHAT:
                                 SessionManager.getInstance().broadcastMessage(r);

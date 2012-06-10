@@ -26,6 +26,7 @@ public class ClientFrame extends javax.swing.JFrame {
     private ClientFrame() {
         initComponents();
         ((DefaultCaret)chatArea.getCaret()).setUpdatePolicy(DefaultCaret.ALWAYS_UPDATE);
+        documentArea.setTabSize(4);
     }
     
     public void chatWrite(String s) {

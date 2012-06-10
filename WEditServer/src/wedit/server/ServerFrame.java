@@ -29,6 +29,7 @@ public class ServerFrame extends javax.swing.JFrame {
         initComponents();
         inputField.requestFocusInWindow();
         ((DefaultCaret)consoleArea.getCaret()).setUpdatePolicy(DefaultCaret.ALWAYS_UPDATE);
+        consoleArea.setTabSize(4);
     }
     
     public void consoleWrite(String s) {
@@ -99,11 +100,20 @@ public class ServerFrame extends javax.swing.JFrame {
                 } else {
                     ServerFrame.getInstance().consoleWrite("What do you want to say?");
                 }
+            } else if (spl[0].equals("display")) {
+                ServerFrame.getInstance().consoleWrite(WEditServer.document.toString());
+            } else if (spl[0].equals("info")) {
+                ServerFrame.getInstance().consoleWrite(
+                        "Document info:\n"
+                        + "# characters:\t" + WEditServer.document.length() + "\n"
+                        + "# words:\t" + (WEditServer.document.length() == 0 ? 0 : WEditServer.document.toString().split("[ \n\t]").length));
             } else if (spl[0].equals("help")) {
                 ServerFrame.getInstance().consoleWrite(
                         "Commands:\n"
+                        + "display\t\t\tDisplay the document\n"
+                        + "info\t\t\tShow character and word counts\n"
                         + "say <message>\tBroadcast chat message\n"
-                        + "help\t\tDisplay this list");
+                        + "help\t\t\tDisplay this list");
             } else {
                 ServerFrame.getInstance().consoleWrite("Command " + spl[0] + " not recognized.\n"
                         + "Type 'help' for a list of available commands.");
