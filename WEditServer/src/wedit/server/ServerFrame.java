@@ -89,6 +89,7 @@ public class ServerFrame extends javax.swing.JFrame {
 
     private void inputFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inputFieldActionPerformed
         if (!inputField.getText().isEmpty()) {
+            ServerFrame.getInstance().consoleWrite("$ " + inputField.getText());
             String[] spl = inputField.getText().split(" ");
             if (spl[0].equals("say")) {
                 if (spl.length > 1) {
@@ -96,8 +97,14 @@ public class ServerFrame extends javax.swing.JFrame {
                 } else {
                     ServerFrame.getInstance().consoleWrite("What do you want to say?");
                 }
+            } else if (spl[0].equals("help")) {
+                ServerFrame.getInstance().consoleWrite(
+                        "Commands:\n"
+                        + "say <message>\tBroadcast chat message\n"
+                        + "help\t\tDisplay this list");
             } else {
-                ServerFrame.getInstance().consoleWrite("Command " + spl[0] + " not recognized.");
+                ServerFrame.getInstance().consoleWrite("Command " + spl[0] + " not recognized.\n"
+                        + "Type 'help' for a list of available commands.");
             }
             inputField.setText("");
         }
