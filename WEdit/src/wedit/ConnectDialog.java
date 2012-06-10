@@ -30,15 +30,17 @@ public class ConnectDialog extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        serverAddressLabel = new javax.swing.JLabel();
+        nickLabel = new javax.swing.JLabel();
         addressField = new javax.swing.JTextField();
         submitButton = new javax.swing.JButton();
+        nickField = new javax.swing.JTextField();
+        serverAddressLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Connect to a server");
         setResizable(false);
 
-        serverAddressLabel.setText("Server address:");
+        nickLabel.setText("Nickname:");
 
         addressField.setText("127.0.0.1");
 
@@ -49,15 +51,27 @@ public class ConnectDialog extends javax.swing.JFrame {
             }
         });
 
+        serverAddressLabel1.setText("Server address:");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(addressField, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(serverAddressLabel))
+                .addComponent(serverAddressLabel1)
+                .addContainerGap(135, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(addressField, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(nickLabel)
+                .addContainerGap(169, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(nickField, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(182, Short.MAX_VALUE)
@@ -68,9 +82,13 @@ public class ConnectDialog extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(serverAddressLabel)
+                .addComponent(serverAddressLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(addressField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(nickLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(nickField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(submitButton)
                 .addContainerGap())
@@ -80,7 +98,9 @@ public class ConnectDialog extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void submitButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_submitButtonMouseClicked
-        WEdit wedit = new WEdit(addressField.getText());
+        WEdit wedit = new WEdit(addressField.getText(), nickField.getText());
+        setVisible(false);
+        dispose();
     }//GEN-LAST:event_submitButtonMouseClicked
 
     /**
@@ -120,7 +140,9 @@ public class ConnectDialog extends javax.swing.JFrame {
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField addressField;
-    private javax.swing.JLabel serverAddressLabel;
+    private javax.swing.JTextField nickField;
+    private javax.swing.JLabel nickLabel;
+    private javax.swing.JLabel serverAddressLabel1;
     private javax.swing.JButton submitButton;
     // End of variables declaration//GEN-END:variables
 }

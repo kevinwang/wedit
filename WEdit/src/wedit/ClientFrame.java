@@ -23,7 +23,6 @@ public class ClientFrame extends javax.swing.JFrame {
      */
     private ClientFrame() {
         initComponents();
-        new ConnectDialog().setVisible(true);
     }
 
     /**

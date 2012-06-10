@@ -87,7 +87,7 @@ public class ServerFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void inputFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inputFieldActionPerformed
-        if (!inputField.getText().equals("")) {
+        if (!inputField.getText().isEmpty()) {
             String[] spl = inputField.getText().split(" ");
             if (spl[0].equals("say")) {
                 if (spl.length > 1) {
