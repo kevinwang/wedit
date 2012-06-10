@@ -42,7 +42,7 @@ public class ConnectDialog extends javax.swing.JFrame {
 
         nickLabel.setText("Nickname:");
 
-        addressField.setText("127.0.0.1");
+        addressField.setText("localhost");
         addressField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 addressFieldActionPerformed(evt);
@@ -76,13 +76,13 @@ public class ConnectDialog extends javax.swing.JFrame {
                         .addGap(0, 125, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(addressField, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
+                        .addGap(0, 2, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(nickLabel)
                         .addGap(0, 159, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(nickField, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
+                        .addGap(0, 2, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 172, Short.MAX_VALUE)
                         .addComponent(submitButton)))
