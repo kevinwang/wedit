@@ -3,7 +3,7 @@
  * and open the template in the editor.
  */
 package wedit.client;
-
+import wedit.net.Request;
 /**
  *
  * @author owner
@@ -56,6 +56,11 @@ public class ClientFrame extends javax.swing.JFrame {
         documentArea.setLineWrap(true);
         documentArea.setRows(5);
         documentArea.setWrapStyleWord(true);
+        documentArea.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                documentAreaKeyTyped(evt);
+            }
+        });
         jScrollPane2.setViewportView(documentArea);
 
         chatArea.setColumns(10);
@@ -106,6 +111,14 @@ public class ClientFrame extends javax.swing.JFrame {
             chatField.setText("");
         }
     }//GEN-LAST:event_chatFieldActionPerformed
+
+    private void documentAreaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_documentAreaKeyTyped
+        if(evt.getKeyCode()==8){
+            RequestHandler.getInstance().addRequest(new Request('d',evt.getKeyLocation()));
+        }else{
+            RequestHandler.getInstance().addRequest(new Request('i',evt.getKeyLocation(),Character.toString(evt.getKeyChar())));
+        }
+    }//GEN-LAST:event_documentAreaKeyTyped
 
     /**
      * @param args the command line arguments
