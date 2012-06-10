@@ -16,7 +16,7 @@ import wedit.net.Session;
  * @author Kevin Wang
  */
 public class WEdit {
-    Session session;
+    public static Session session;
     
     public WEdit(String address, String nick) {
         try {
@@ -41,7 +41,6 @@ public class WEdit {
                 while (true) {
                     try {
                         if (session.ready()) {
-                            System.out.println("asdf");
                             RequestHandler.getInstance().addRequest(new Request(session.readLine()));
                         }
                     } catch (IOException e) {
@@ -50,6 +49,10 @@ public class WEdit {
             }
             
         }).start();
+    }
+    
+    public static void chat(String s) {
+        session.write(new Request(Request.TYPE_CHAT, s));
     }
 
     /**

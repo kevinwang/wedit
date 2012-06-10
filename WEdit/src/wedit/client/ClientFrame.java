@@ -61,6 +61,12 @@ public class ClientFrame extends javax.swing.JFrame {
         chatArea.setRows(5);
         jScrollPane5.setViewportView(chatArea);
 
+        chatField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                chatFieldActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -89,6 +95,13 @@ public class ClientFrame extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void chatFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chatFieldActionPerformed
+        if (!chatField.getText().isEmpty()) {
+            WEdit.chat(chatField.getText());
+            chatField.setText("");
+        }
+    }//GEN-LAST:event_chatFieldActionPerformed
 
     /**
      * @param args the command line arguments
