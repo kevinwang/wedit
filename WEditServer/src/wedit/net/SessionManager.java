@@ -93,6 +93,13 @@ public class SessionManager {
         ServerFrame.getInstance().consoleWrite("[CHAT] <" + r.getOrigin() + "> " + r.getData());
     }
     
+    public void serverBroadcast(String str) {
+        for (Session s : activeSessions) {
+            s.write(new Request(Request.TYPE_CHAT, 0, "[SERVER] " + str));
+        }
+        ServerFrame.getInstance().consoleWrite("[SERVER] " + str);
+    }
+    
     public int getNumActiveSessions() {
         return activeSessions.size();
     }

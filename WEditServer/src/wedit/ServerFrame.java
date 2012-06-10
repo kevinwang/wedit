@@ -5,6 +5,7 @@
 package wedit;
 
 import java.awt.Component;
+import wedit.net.SessionManager;
 
 /**
  *
@@ -50,6 +51,12 @@ public class ServerFrame extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("WEdit Server");
 
+        inputField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                inputFieldActionPerformed(evt);
+            }
+        });
+
         consoleArea.setColumns(20);
         consoleArea.setEditable(false);
         consoleArea.setRows(5);
@@ -78,6 +85,22 @@ public class ServerFrame extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void inputFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inputFieldActionPerformed
+        if (!inputField.getText().equals("")) {
+            String[] spl = inputField.getText().split(" ");
+            if (spl[0].equals("say")) {
+                if (spl.length > 1) {
+                    SessionManager.getInstance().serverBroadcast(inputField.getText().substring("say".length() + 1));
+                } else {
+                    ServerFrame.getInstance().consoleWrite("What do you want to say?");
+                }
+            } else {
+                ServerFrame.getInstance().consoleWrite("Command " + spl[0] + " not recognized.");
+            }
+            inputField.setText("");
+        }
+    }//GEN-LAST:event_inputFieldActionPerformed
 
     /**
      * @param args the command line arguments
