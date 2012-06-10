@@ -23,6 +23,7 @@ public class ClientFrame extends javax.swing.JFrame {
      */
     private ClientFrame() {
         initComponents();
+        new ConnectDialog().setVisible(true);
     }
 
     /**
@@ -45,6 +46,7 @@ public class ClientFrame extends javax.swing.JFrame {
         jScrollPane3.setViewportView(jEditorPane2);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("WEdit");
 
         documentArea.setColumns(20);
         documentArea.setRows(5);
@@ -77,7 +79,7 @@ public class ClientFrame extends javax.swing.JFrame {
                         .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 304, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(chatField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane2))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 338, Short.MAX_VALUE))
                 .addContainerGap())
         );
 

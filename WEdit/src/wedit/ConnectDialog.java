@@ -43,6 +43,11 @@ public class ConnectDialog extends javax.swing.JFrame {
         addressField.setText("127.0.0.1");
 
         submitButton.setText("Submit");
+        submitButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                submitButtonMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -73,6 +78,10 @@ public class ConnectDialog extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void submitButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_submitButtonMouseClicked
+        WEdit wedit = new WEdit(addressField.getText());
+    }//GEN-LAST:event_submitButtonMouseClicked
 
     /**
      * @param args the command line arguments
