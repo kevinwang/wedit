@@ -23,5 +23,6 @@ public class WEditServer {
      */
     public static void main(String[] args) {
         ServerFrame.getInstance().setVisible(true);
+        ServerFrame.getInstance().consoleWrite("WEdit server started.");
     }
 }
