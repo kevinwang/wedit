@@ -7,7 +7,7 @@ package wedit.client;
 import java.io.IOException;
 import java.net.Socket;
 import javax.swing.JOptionPane;
-import wedit.net.Ports;
+import wedit.net.Constants;
 import wedit.net.Request;
 import wedit.net.Session;
 
@@ -33,7 +33,7 @@ public class WEdit {
     
     private WEdit(String address, String nick) {
         try {
-            session = new Session(new Socket(address, Ports.WEDIT_PORT));
+            session = new Session(new Socket(address, Constants.WEDIT_PORT));
         } catch (IOException e) {
             JOptionPane.showMessageDialog(null, "Could not connect to server at "
                     + address + ".\nError: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);

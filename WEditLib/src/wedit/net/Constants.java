@@ -8,6 +8,7 @@ package wedit.net;
  *
  * @author kevin
  */
-public interface Ports {
+public interface Constants {
     public static final int WEDIT_PORT = 23343;
+    public static final int TAB_SIZE = 4;
 }

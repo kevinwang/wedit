@@ -5,6 +5,7 @@
 package wedit.server;
 
 import javax.swing.text.DefaultCaret;
+import wedit.net.Constants;
 import wedit.net.SessionManager;
 
 /**
@@ -29,7 +30,7 @@ public class ServerFrame extends javax.swing.JFrame {
         initComponents();
         inputField.requestFocusInWindow();
         ((DefaultCaret)consoleArea.getCaret()).setUpdatePolicy(DefaultCaret.ALWAYS_UPDATE);
-        consoleArea.setTabSize(4);
+        consoleArea.setTabSize(Constants.TAB_SIZE);
     }
     
     public void consoleWrite(String s) {

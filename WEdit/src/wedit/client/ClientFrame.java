@@ -5,6 +5,7 @@
 package wedit.client;
 import java.awt.event.KeyEvent;
 import javax.swing.text.DefaultCaret;
+import wedit.net.Constants;
 import wedit.net.Request;
 /**
  *
@@ -26,7 +27,7 @@ public class ClientFrame extends javax.swing.JFrame {
     private ClientFrame() {
         initComponents();
         ((DefaultCaret)chatArea.getCaret()).setUpdatePolicy(DefaultCaret.ALWAYS_UPDATE);
-        documentArea.setTabSize(4);
+        documentArea.setTabSize(Constants.TAB_SIZE);
     }
     
     public void chatWrite(String s) {

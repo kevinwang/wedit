@@ -33,7 +33,7 @@ public class SessionManager {
     
     private SessionManager() {
         try {
-            server = new ServerSocket(Ports.WEDIT_PORT);
+            server = new ServerSocket(Constants.WEDIT_PORT);
         } catch (IOException e) {
             ServerFrame.getInstance().consoleWrite("Error constructing server socket: " + e.getMessage());
         }
