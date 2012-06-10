@@ -68,8 +68,6 @@ public class SessionTest {
             while (socket == null);
             reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             
-            System.out.println(session);
-            
             session.write(request);
             while (!reader.ready());
             assertEquals("Request string is sent intact", request.toString(), reader.readLine());
@@ -100,8 +98,6 @@ public class SessionTest {
             session = new Session(new Socket("localhost", 23343));
             while (socket == null);
             reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-            
-            System.out.println(session);
             
             session.write(request);
             while (!reader.ready());
@@ -137,8 +133,6 @@ public class SessionTest {
             while (socket == null);
             reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             
-            System.out.println(session);
-            
             session.write(request);
             while (!reader.ready());
             
@@ -172,16 +166,12 @@ public class SessionTest {
             while (socket == null);
             reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             
-            System.out.println(session);
-            
             session.write(nickRequest);
             while (!reader.ready());
             
             Request receivedRequest = new Request(reader.readLine());
             session.setNick(receivedRequest.getData());
             assertEquals("Session nickname changes properly", newNick, session.toString());
-            
-            System.out.println(session);
             
             socket.close();
             serverSocket.close();
