@@ -75,7 +75,7 @@ public class RequestHandler {
                                 String oldNick = r.getOrigin().toString();
                                 String newNick = r.getData();
                                 r.getOrigin().setNick(newNick);
-                                ServerFrame.getInstance().consoleWrite(oldNick + " is now known as " + newNick + ".");
+                                SessionManager.getInstance().serverBroadcast(oldNick + " is now known as " + newNick + ".");
                                 break;
                             default:
                                 break;

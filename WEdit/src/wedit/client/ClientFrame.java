@@ -136,7 +136,20 @@ public class ClientFrame extends javax.swing.JFrame {
 
     private void chatFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chatFieldActionPerformed
         if (!chatField.getText().isEmpty()) {
-            WEdit.getInstance().chat(chatField.getText());
+            if (chatField.getText().charAt(0) == '/') {
+                String[] spl = chatField.getText().substring(1).split(" ");
+                if (spl[0].equals("nick")) {
+                    if (spl.length > 1) {
+                        WEdit.getInstance().makeRequest(new Request(Request.TYPE_NICK, spl[1]));
+                    } else {
+                        chatWrite("No nick specified.");
+                    }
+                } else {
+                    chatWrite("Command " + spl[0] + " not recognized.");
+                }
+            } else {
+                WEdit.getInstance().chat(chatField.getText());
+            }
             chatField.setText("");
         }
     }//GEN-LAST:event_chatFieldActionPerformed

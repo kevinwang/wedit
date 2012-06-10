@@ -97,7 +97,7 @@ public class ServerFrame extends javax.swing.JFrame {
             String[] spl = inputField.getText().split(" ");
             if (spl[0].equals("say")) {
                 if (spl.length > 1) {
-                    SessionManager.getInstance().serverBroadcast(inputField.getText().substring("say".length() + 1));
+                    SessionManager.getInstance().serverBroadcast("[SERVER] " + inputField.getText().substring("say".length() + 1));
                 } else {
                     ServerFrame.getInstance().consoleWrite("What do you want to say?");
                 }

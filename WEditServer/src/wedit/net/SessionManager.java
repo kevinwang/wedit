@@ -95,9 +95,9 @@ public class SessionManager {
     
     public void serverBroadcast(String str) {
         for (Session s : activeSessions) {
-            s.write(new Request(Request.TYPE_CHAT, 0, "[SERVER] " + str));
+            s.write(new Request(Request.TYPE_CHAT, 0, str));
         }
-        ServerFrame.getInstance().consoleWrite("[SERVER] " + str);
+        ServerFrame.getInstance().consoleWrite(str);
     }
     
     public void broadcastRequest(BacktracedRequest r) {
