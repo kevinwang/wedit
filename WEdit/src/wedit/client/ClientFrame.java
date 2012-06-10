@@ -108,16 +108,18 @@ public class ClientFrame extends javax.swing.JFrame {
 
     private void chatFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chatFieldActionPerformed
         if (!chatField.getText().isEmpty()) {
-            WEdit.chat(chatField.getText());
+            WEdit.getInstance().chat(chatField.getText());
             chatField.setText("");
         }
     }//GEN-LAST:event_chatFieldActionPerformed
 
     private void documentAreaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_documentAreaKeyTyped
         if(evt.getKeyChar()==KeyEvent.VK_BACK_SPACE){
-            RequestHandler.getInstance().addRequest(new Request('d',evt.getKeyLocation()));
-        }else{
-            RequestHandler.getInstance().addRequest(new Request('i',evt.getKeyLocation(),Character.toString(evt.getKeyChar())));
+            WEdit.getInstance().makeRequest(new Request(Request.TYPE_DELETE,documentArea.getCaret().getDot()));
+        } else if (evt.getKeyChar() == KeyEvent.VK_ENTER) {
+            WEdit.getInstance().makeRequest(new Request(Request.TYPE_INSERT,documentArea.getCaret().getDot() - 1,Character.toString((char)13)));
+        } else {
+            WEdit.getInstance().makeRequest(new Request(Request.TYPE_INSERT,documentArea.getCaret().getDot(),Character.toString(evt.getKeyChar())));
         }
     }//GEN-LAST:event_documentAreaKeyTyped
 

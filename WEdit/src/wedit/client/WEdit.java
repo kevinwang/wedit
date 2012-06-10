@@ -16,9 +16,22 @@ import wedit.net.Session;
  * @author Kevin Wang
  */
 public class WEdit {
-    public static Session session;
+    private static WEdit instance;
     
-    public WEdit(String address, String nick) {
+    private Session session;
+    
+    public static WEdit getInstance(String address, String nick) {
+        if (instance == null) {
+            instance = new WEdit(address, nick);
+        }
+        return instance;
+    }
+    
+    public static WEdit getInstance() {
+        return instance;
+    }
+    
+    private WEdit(String address, String nick) {
         try {
             session = new Session(new Socket(address, Ports.WEDIT_PORT));
         } catch (IOException e) {
@@ -51,8 +64,12 @@ public class WEdit {
         }).start();
     }
     
-    public static void chat(String s) {
+    public void chat(String s) {
         session.write(new Request(Request.TYPE_CHAT, s));
+    }
+    
+    public void makeRequest(Request r) {
+        session.write(r);
     }
 
     /**
