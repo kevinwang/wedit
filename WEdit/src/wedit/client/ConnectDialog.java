@@ -108,7 +108,7 @@ public class ConnectDialog extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void submitButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_submitButtonMouseClicked
-        WEdit.getInstance(addressField.getText(), nickField.getText()).start();
+        WEdit.getInstance(addressField.getText(), nickField.getText().trim()).start();
         setVisible(false);
         dispose();
     }//GEN-LAST:event_submitButtonMouseClicked
