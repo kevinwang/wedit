@@ -80,7 +80,7 @@ public class RequestHandler {
                             case Request.TYPE_SYNC:
                                 r.getOrigin().write(new Request(Request.TYPE_CLEAR));
                                 SessionManager.getInstance().sendDocument(r.getOrigin());
-                                SessionManager.getInstance().serverBroadcast("Received sync request from " + r.getOrigin() + ".");
+                                ServerFrame.getInstance().consoleWrite("Received sync request from " + r.getOrigin() + ".");
                                 break;
                             default:
                                 break;
