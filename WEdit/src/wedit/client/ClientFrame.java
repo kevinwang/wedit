@@ -58,6 +58,10 @@ public class ClientFrame extends javax.swing.JFrame {
             documentArea.setCaretPosition(caretPos);
         }
     }
+    
+    public void clear() {
+        documentArea.setText("");
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -144,6 +148,8 @@ public class ClientFrame extends javax.swing.JFrame {
                     } else {
                         chatWrite("No nick specified.");
                     }
+                } else if (spl[0].equals("sync")) {
+                    WEdit.getInstance().makeRequest(new Request(Request.TYPE_SYNC));
                 } else {
                     chatWrite("Command " + spl[0] + " not recognized.");
                 }

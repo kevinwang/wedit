@@ -65,6 +65,8 @@ public class RequestHandler {
                             case Request.TYPE_CHAT:
                                 ClientFrame.getInstance().chatWrite(r.getData());
                                 break;
+                            case Request.TYPE_CLEAR:
+                                ClientFrame.getInstance().clear();
                             default:
                                 break;
                         }

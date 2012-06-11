@@ -77,6 +77,11 @@ public class RequestHandler {
                                 r.getOrigin().setNick(newNick);
                                 SessionManager.getInstance().serverBroadcast(oldNick + " is now known as " + newNick + ".");
                                 break;
+                            case Request.TYPE_SYNC:
+                                r.getOrigin().write(new Request(Request.TYPE_CLEAR));
+                                SessionManager.getInstance().sendDocument(r.getOrigin());
+                                SessionManager.getInstance().serverBroadcast("Received sync request from " + r.getOrigin() + ".");
+                                break;
                             default:
                                 break;
                         }

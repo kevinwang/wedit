@@ -13,6 +13,8 @@ public class Request {
     public static final char TYPE_DELETE = 'd';
     public static final char TYPE_CHAT = 'c';
     public static final char TYPE_NICK = 'n';
+    public static final char TYPE_CLEAR = 'p';
+    public static final char TYPE_SYNC = 's';
     
     /**
      * ASCII unit separator.
@@ -59,13 +61,23 @@ public class Request {
     }
     
     /**
+     * Constructs a request without an index nor data.
+     * @param requestType Type of request.
+     */
+    public Request(char requestType) {
+        this.requestType = requestType;
+    }
+    
+    /**
      * Constructs a request from a formatted request string.
      * @param requestString Request string to construct request with.
      */
     public Request(String requestString) {
         String[] tokens = requestString.split(DELIMITER);
         requestType = tokens[0].charAt(0);
-        if (requestType == TYPE_CHAT || requestType == TYPE_NICK) {
+        if (requestType == TYPE_CLEAR || requestType == TYPE_SYNC) {
+            return;
+        } else if (requestType == TYPE_CHAT || requestType == TYPE_NICK) {
             data = tokens[1];
         }
         else {

@@ -50,14 +50,7 @@ public class SessionManager {
                     Socket s = server.accept();
                     Session ses = new Session(s);
                     activeSessions.add(ses);
-                    String doc = WEditServer.document.toString();
-                    for (int i = 0; i < doc.length(); i++) {
-                        if (doc.charAt(i) == '\n') {
-                            ses.write(new Request(Request.TYPE_INSERT, i, Request.NEWLINE));
-                        } else {
-                            ses.write(new Request(Request.TYPE_INSERT, i, Character.toString(doc.charAt(i))));
-                        }
-                    }
+                    sendDocument(ses);
                     SessionManager.getInstance().serverBroadcast(ses + " has opened the document.");
                 } catch (IOException e) {
                 }
@@ -113,6 +106,17 @@ public class SessionManager {
         for (Session s : activeSessions) {
             if (!s.equals(r.getOrigin())) {
                 s.write(r);
+            }
+        }
+    }
+    
+    public void sendDocument(Session s) {
+        String doc = WEditServer.document.toString();
+        for (int i = 0; i < doc.length(); i++) {
+            if (doc.charAt(i) == '\n') {
+                s.write(new Request(Request.TYPE_INSERT, i, Request.NEWLINE));
+            } else {
+                s.write(new Request(Request.TYPE_INSERT, i, Character.toString(doc.charAt(i))));
             }
         }
     }
