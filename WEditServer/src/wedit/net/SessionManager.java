@@ -58,7 +58,7 @@ public class SessionManager {
                             ses.write(new Request(Request.TYPE_INSERT, i, Character.toString(doc.charAt(i))));
                         }
                     }
-                    ServerFrame.getInstance().consoleWrite(ses + " has opened the document.");
+                    SessionManager.getInstance().serverBroadcast(ses + " has opened the document.");
                 } catch (IOException e) {
                 }
                 acceptNextSession();
