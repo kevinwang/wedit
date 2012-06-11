@@ -13,6 +13,7 @@ import java.util.HashSet;
 import java.util.Set;
 import wedit.server.RequestHandler;
 import wedit.server.ServerFrame;
+import wedit.server.WEditServer;
 
 /**
  *
@@ -49,6 +50,14 @@ public class SessionManager {
                     Socket s = server.accept();
                     Session ses = new Session(s);
                     activeSessions.add(ses);
+                    String doc = WEditServer.document.toString();
+                    for (int i = 0; i < doc.length(); i++) {
+                        if (doc.charAt(i) == '\n') {
+                            ses.write(new Request(Request.TYPE_INSERT, i, Request.NEWLINE));
+                        } else {
+                            ses.write(new Request(Request.TYPE_INSERT, i, Character.toString(doc.charAt(i))));
+                        }
+                    }
                     ServerFrame.getInstance().consoleWrite(ses + " has opened the document.");
                 } catch (IOException e) {
                 }
