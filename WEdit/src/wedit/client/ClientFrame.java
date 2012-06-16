@@ -16,7 +16,8 @@ import wedit.net.Request;
  */
 public class ClientFrame extends javax.swing.JFrame {
     private static ClientFrame instance;
-    
+    private AudioPlayer p = AudioPlayer.player;
+    private AudioStream as;
     public static ClientFrame getInstance() {
         if (instance == null) {
             instance = new ClientFrame();
@@ -31,6 +32,10 @@ public class ClientFrame extends javax.swing.JFrame {
         initComponents();
         ((DefaultCaret)chatArea.getCaret()).setUpdatePolicy(DefaultCaret.ALWAYS_UPDATE);
         documentArea.setTabSize(Constants.TAB_SIZE);
+        try{
+            as = new AudioStream(new FileInputStream("src/sounds/notif.wav"));
+        }catch(Exception e){
+        }
     }
     
     public void chatWrite(String s) {
@@ -64,13 +69,7 @@ public class ClientFrame extends javax.swing.JFrame {
     
     public void notif(){
         if(!(chatField.isFocusOwner() && documentArea.isFocusOwner())){
-            try{ 
-                AudioPlayer p = AudioPlayer.player;
-                AudioStream as = new AudioStream(new FileInputStream("src/sounds/notif.wav"));
-                p.start(as);
-            }catch(Exception e){
-            }
-            
+            p.start(as);
         }
     }
     
