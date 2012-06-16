@@ -4,7 +4,10 @@
  */
 package wedit.client;
 import java.awt.event.KeyEvent;
+import java.io.FileInputStream;
 import javax.swing.text.DefaultCaret;
+import sun.audio.AudioPlayer;
+import sun.audio.AudioStream;
 import wedit.net.Constants;
 import wedit.net.Request;
 /**
@@ -56,6 +59,18 @@ public class ClientFrame extends javax.swing.JFrame {
             documentArea.setCaretPosition(documentArea.getText().length());
         } else {
             documentArea.setCaretPosition(caretPos);
+        }
+    }
+    
+    public void notif(){
+        if(!(chatField.isFocusOwner() && documentArea.isFocusOwner())){
+            try{ 
+                AudioPlayer p = AudioPlayer.player;
+                AudioStream as = new AudioStream(new FileInputStream("src/sounds/notif.wav"));
+                p.start(as);
+            }catch(Exception e){
+            }
+            
         }
     }
     
@@ -208,6 +223,7 @@ public class ClientFrame extends javax.swing.JFrame {
          */
         java.awt.EventQueue.invokeLater(new Runnable() {
 
+            @Override
             public void run() {
                 new ClientFrame().setVisible(true);
             }
