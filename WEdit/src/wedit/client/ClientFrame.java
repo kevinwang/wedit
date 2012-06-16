@@ -5,6 +5,7 @@
 package wedit.client;
 import java.awt.event.KeyEvent;
 import java.io.FileInputStream;
+import javax.swing.JOptionPane;
 import javax.swing.text.DefaultCaret;
 import sun.audio.AudioPlayer;
 import sun.audio.AudioStream;
@@ -71,6 +72,10 @@ public class ClientFrame extends javax.swing.JFrame {
         if(!(chatField.isFocusOwner() && documentArea.isFocusOwner())){
             p.start(as);
         }
+    }
+    
+    public void kickMsg(){
+        JOptionPane.showMessageDialog(ClientFrame.getInstance(), "You were kicked and banned from the server.", "Kicked", JOptionPane.PLAIN_MESSAGE);
     }
     
     public void clear() {
