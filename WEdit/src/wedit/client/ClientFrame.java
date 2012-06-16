@@ -4,7 +4,11 @@
  */
 package wedit.client;
 import java.awt.event.KeyEvent;
+import java.io.FileInputStream;
+import javax.swing.JOptionPane;
 import javax.swing.text.DefaultCaret;
+import sun.audio.AudioPlayer;
+import sun.audio.AudioStream;
 import wedit.net.Constants;
 import wedit.net.Request;
 /**
@@ -13,7 +17,8 @@ import wedit.net.Request;
  */
 public class ClientFrame extends javax.swing.JFrame {
     private static ClientFrame instance;
-    
+    private AudioPlayer p = AudioPlayer.player;
+    private AudioStream as;
     public static ClientFrame getInstance() {
         if (instance == null) {
             instance = new ClientFrame();
@@ -29,6 +34,10 @@ public class ClientFrame extends javax.swing.JFrame {
         ((DefaultCaret)chatArea.getCaret()).setUpdatePolicy(DefaultCaret.ALWAYS_UPDATE);
         documentArea.setTabSize(Constants.TAB_SIZE);
         chatArea.setTabSize(Constants.TAB_SIZE);
+        try{
+            as = new AudioStream(new FileInputStream("src/sounds/notif.wav"));
+        }catch(Exception e){
+        }
     }
     
     public void chatWrite(String s) {
@@ -58,6 +67,16 @@ public class ClientFrame extends javax.swing.JFrame {
         } else {
             documentArea.setCaretPosition(caretPos);
         }
+    }
+    
+    public void notif(){
+        if(!(chatField.isFocusOwner() && documentArea.isFocusOwner())){
+            p.start(as);
+        }
+    }
+    
+    public void kickMsg(){
+        JOptionPane.showMessageDialog(ClientFrame.getInstance(), "You were kicked and banned from the server.", "Kicked", JOptionPane.PLAIN_MESSAGE);
     }
     
     public void clear() {
@@ -216,6 +235,7 @@ public class ClientFrame extends javax.swing.JFrame {
          */
         java.awt.EventQueue.invokeLater(new Runnable() {
 
+            @Override
             public void run() {
                 new ClientFrame().setVisible(true);
             }

@@ -6,6 +6,7 @@ package wedit.client;
 
 import java.util.LinkedList;
 import java.util.Queue;
+import javax.swing.JOptionPane;
 import wedit.net.Request;
 
 /**
@@ -64,9 +65,13 @@ public class RequestHandler {
                                 break;
                             case Request.TYPE_CHAT:
                                 ClientFrame.getInstance().chatWrite(r.getData());
+                                ClientFrame.getInstance().notif();
                                 break;
                             case Request.TYPE_CLEAR:
                                 ClientFrame.getInstance().clear();
+                                break;
+                            case Request.TYPE_KICK:
+                                ClientFrame.getInstance().kickMsg();
                             default:
                                 break;
                         }
