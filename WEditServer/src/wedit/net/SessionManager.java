@@ -95,6 +95,20 @@ public class SessionManager {
         ServerFrame.getInstance().consoleWrite("[CHAT] <" + r.getOrigin() + "> " + r.getData());
     }
     
+    public void kick(String name){
+        boolean kicked = false;
+        for(Session s : activeSessions){
+            if(s.toString().equals(name)){
+                kicked = true;
+                activeSessions.remove(s);
+                s.close();
+            }
+        }
+        if(kicked){
+            SessionManager.getInstance().serverBroadcast(name + " was kicked.");
+        }
+    }
+    
     public void serverBroadcast(String str) {
         for (Session s : activeSessions) {
             s.write(new Request(Request.TYPE_CHAT, 0, str));

@@ -52,7 +52,7 @@ public class Session {
     public void setNick(String nick) {
         this.nickname = nick;
     }
-
+    
     @Override
     public String toString() {
         return nickname;

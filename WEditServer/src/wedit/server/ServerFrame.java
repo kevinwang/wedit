@@ -101,6 +101,12 @@ public class ServerFrame extends javax.swing.JFrame {
                 } else {
                     ServerFrame.getInstance().consoleWrite("What do you want to say?");
                 }
+            } else if (spl[0].equals("kick")) {
+                if (spl.length > 1) {
+                    SessionManager.getInstance().kick(spl[1]);
+                }else{
+                    ServerFrame.getInstance().consoleWrite("Who do you want to kick?");
+                }
             } else if (spl[0].equals("display")) {
                 ServerFrame.getInstance().consoleWrite(WEditServer.document.toString());
             } else if (spl[0].equals("info")) {
@@ -114,7 +120,8 @@ public class ServerFrame extends javax.swing.JFrame {
                         + "display\t\t\tDisplay the document\n"
                         + "info\t\t\tShow character and word counts\n"
                         + "say <message>\tBroadcast chat message\n"
-                        + "help\t\t\tDisplay this list");
+                        + "help\t\t\tDisplay this list\n"
+                        + "kick <nick>\t\tForcefully disconnect a client");
             } else {
                 ServerFrame.getInstance().consoleWrite("Command " + spl[0] + " not recognized.\n"
                         + "Type 'help' for a list of available commands.");
