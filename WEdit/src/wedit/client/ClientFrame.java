@@ -28,6 +28,7 @@ public class ClientFrame extends javax.swing.JFrame {
         initComponents();
         ((DefaultCaret)chatArea.getCaret()).setUpdatePolicy(DefaultCaret.ALWAYS_UPDATE);
         documentArea.setTabSize(Constants.TAB_SIZE);
+        chatArea.setTabSize(Constants.TAB_SIZE);
     }
     
     public void chatWrite(String s) {
@@ -150,8 +151,15 @@ public class ClientFrame extends javax.swing.JFrame {
                     }
                 } else if (spl[0].equals("sync")) {
                     WEdit.getInstance().makeRequest(new Request(Request.TYPE_SYNC));
+                } else if (spl[0].equals("help")) {
+                    chatWrite(
+                            "Commands:\n"
+                            + "nick <new name>\tChange your nickname\n"
+                            + "sync\t\tSynchronize local document\n"
+                            + "help\t\tDisplay this list");
                 } else {
-                    chatWrite("Command " + spl[0] + " not recognized.");
+                    chatWrite("Command " + spl[0] + " not recognized.\n"
+                            + "Type '/help' for a list of available commands.");
                 }
             } else {
                 WEdit.getInstance().chat(chatField.getText());
