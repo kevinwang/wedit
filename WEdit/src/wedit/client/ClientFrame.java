@@ -79,7 +79,7 @@ public class ClientFrame extends javax.swing.JFrame {
     }
     
     public void kickMsg(){
-        JOptionPane.showMessageDialog(ClientFrame.getInstance(), "You were kicked and banned from the server.", "Kicked", JOptionPane.PLAIN_MESSAGE);
+        JOptionPane.showMessageDialog(ClientFrame.getInstance(), "You have been kicked from the server.", "Kicked", JOptionPane.PLAIN_MESSAGE);
     }
     
     public void clear() {
