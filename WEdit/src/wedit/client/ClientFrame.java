@@ -34,10 +34,7 @@ public class ClientFrame extends javax.swing.JFrame {
         ((DefaultCaret)chatArea.getCaret()).setUpdatePolicy(DefaultCaret.ALWAYS_UPDATE);
         documentArea.setTabSize(Constants.TAB_SIZE);
         chatArea.setTabSize(Constants.TAB_SIZE);
-        try{
-            as = new AudioStream(new FileInputStream("src/sounds/notif.wav"));
-        }catch(Exception e){
-        }
+        resetNotifStream();
     }
     
     public void chatWrite(String s) {
@@ -70,8 +67,14 @@ public class ClientFrame extends javax.swing.JFrame {
     }
     
     public void notif(){
-        if(!(chatField.isFocusOwner() && documentArea.isFocusOwner())){
-            p.start(as);
+        p.start(as);
+        resetNotifStream();
+    }
+    
+    private void resetNotifStream() {
+        try {
+            as = new AudioStream(new FileInputStream("src/sounds/notif.wav"));
+        }catch(Exception e){
         }
     }
     
