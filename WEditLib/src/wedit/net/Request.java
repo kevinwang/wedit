@@ -15,6 +15,7 @@ public class Request {
     public static final char TYPE_NICK = 'n';
     public static final char TYPE_CLEAR = 'p';
     public static final char TYPE_SYNC = 's';
+    public static final char TYPE_KICK = 'k';
     
     /**
      * ASCII unit separator.

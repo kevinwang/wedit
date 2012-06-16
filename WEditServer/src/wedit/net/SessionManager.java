@@ -100,6 +100,7 @@ public class SessionManager {
         for(Session s : activeSessions){
             if(s.toString().equals(name)){
                 kicked = true;
+                s.write(new Request(Request.TYPE_KICK));
                 activeSessions.remove(s);
                 s.close();
             }

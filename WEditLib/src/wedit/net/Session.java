@@ -8,7 +8,9 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
+import java.net.InetAddress;
 import java.net.Socket;
+import java.util.ArrayList;
 
 /**
  *
@@ -21,12 +23,15 @@ public class Session {
     private String nickname;
     
     private static int guestID = 1;
+    private static ArrayList<InetAddress> banlist = new ArrayList<InetAddress>(); 
 
     public Session(Socket socket) throws IOException {
-        this.socket = socket;
-        in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-        out = new PrintWriter(socket.getOutputStream(), true);
-        nickname = "Guest" + guestID++;
+        if(!banlist.contains(socket.getInetAddress())){
+            this.socket = socket;
+            in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+            out = new PrintWriter(socket.getOutputStream(), true);
+            nickname = "Guest" + guestID++;
+        }
     }
     
     public void write(Request request) {
@@ -44,6 +49,15 @@ public class Session {
     public void close() {
         try {
             socket.close();
+        } catch (IOException e) {
+        } catch (NullPointerException n) {
+        }
+    }
+    
+    public void kick() {
+        try {
+            socket.close();
+            banlist.add(socket.getInetAddress());
         } catch (IOException e) {
         } catch (NullPointerException n) {
         }

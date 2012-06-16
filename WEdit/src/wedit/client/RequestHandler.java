@@ -68,6 +68,9 @@ public class RequestHandler {
                                 break;
                             case Request.TYPE_CLEAR:
                                 ClientFrame.getInstance().clear();
+                                break;
+                            case Request.TYPE_KICK:
+                                System.exit(0);
                             default:
                                 break;
                         }
