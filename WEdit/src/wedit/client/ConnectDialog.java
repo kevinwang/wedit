@@ -21,7 +21,7 @@ public class ConnectDialog extends javax.swing.JFrame {
         initComponents();
     }
     
-    private String RemoveSpaces(String s){
+    private String removeSpaces(String s){
         s = s.trim();
         for(int i = 0; i < s.length(); i++){
             if(s.charAt(i) == ' '){
@@ -113,7 +113,7 @@ public class ConnectDialog extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void submitButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_submitButtonMouseClicked
-        WEdit.getInstance(addressField.getText(), RemoveSpaces(nickField.getText())).start();
+        WEdit.getInstance(addressField.getText(), removeSpaces(nickField.getText())).start();
         setVisible(false);
         dispose();
     }//GEN-LAST:event_submitButtonMouseClicked
