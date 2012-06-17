@@ -22,7 +22,6 @@ import wedit.net.Request;
  * @author owner
  */
 public class ClientFrame extends javax.swing.JFrame {
-
     private static ClientFrame instance;
     private boolean soundToggle = true;
 
@@ -50,15 +49,13 @@ public class ClientFrame extends javax.swing.JFrame {
     public void chatWrite(String s) {
         String text = chatArea.getText();
         chatArea.append((text.equals("") ? "" : "\n") + s);
-        if (soundToggle && !chatField.isFocusOwner() && !documentArea.isFocusOwner()) {
+        if (soundToggle) {
             AudioStream as = null;
             try {
                 as = new AudioStream(new FileInputStream("src/sounds/notif.wav"));
+                AudioPlayer.player.start(as);
             } catch (Exception e) {
-                System.out.println(e);
             }
-            AudioPlayer.player.stop(as);
-            AudioPlayer.player.start(as);
         }
     }
 
