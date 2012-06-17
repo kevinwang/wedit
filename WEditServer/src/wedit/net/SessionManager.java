@@ -11,6 +11,8 @@ import java.util.Collections;
 import java.util.ConcurrentModificationException;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import wedit.server.RequestHandler;
 import wedit.server.ServerFrame;
 import wedit.server.WEditServer;
@@ -100,9 +102,8 @@ public class SessionManager {
         for(Session s : activeSessions){
             if(s.toString().equals(name)){
                 kicked = true;
-                s.write(new Request(Request.TYPE_KICK));
+                s.kick();
                 activeSessions.remove(s);
-                s.close();
             }
         }
         if(kicked){
