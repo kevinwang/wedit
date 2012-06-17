@@ -5,12 +5,10 @@
 package wedit.net;
 
 import java.io.IOException;
+import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.Collections;
-import java.util.ConcurrentModificationException;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 import wedit.server.RequestHandler;
 import wedit.server.ServerFrame;
 import wedit.server.WEditServer;
@@ -24,6 +22,7 @@ public class SessionManager {
     
     private ServerSocket server;
     private Set<Session> activeSessions;
+    private ArrayList<InetAddress> banlist = new ArrayList<InetAddress>();
     
     public static SessionManager getInstance() {
         if (instance == null) {
@@ -46,14 +45,18 @@ public class SessionManager {
 
             @Override
             public void run() {
+                
                 try {
                     Socket s = server.accept();
                     Session ses = new Session(s);
-                    activeSessions.add(ses);
-                    sendDocument(ses);
-                    SessionManager.getInstance().serverBroadcast(ses + " has opened the document.");
+                    if(!banlist.contains(s.getInetAddress())){
+                        activeSessions.add(ses);
+                        sendDocument(ses);
+                        SessionManager.getInstance().serverBroadcast(ses + " has opened the document.");
+                    }
                 } catch (IOException e) {
                 }
+                
                 acceptNextSession();
             }
             
@@ -100,8 +103,9 @@ public class SessionManager {
         for(Session s : activeSessions){
             if(s.toString().equals(name)){
                 kicked = true;
+                banlist.add(s.getAddr());
                 s.write(new Request(Request.TYPE_KICK));
-                activeSessions.remove(s);
+                activeSessions.remove(s); 
                 s.close();
             }
         }

@@ -23,15 +23,16 @@ public class Session {
     private String nickname;
     
     private static int guestID = 1;
-    private static ArrayList<InetAddress> banlist = new ArrayList<InetAddress>(); 
-
+     
     public Session(Socket socket) throws IOException {
-        if(!banlist.contains(socket.getInetAddress())){
-            this.socket = socket;
-            in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-            out = new PrintWriter(socket.getOutputStream(), true);
-            nickname = "Guest" + guestID++;
-        }
+        this.socket = socket;
+        in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+        out = new PrintWriter(socket.getOutputStream(), true);
+        nickname = "Guest" + guestID++;
+    }
+    
+    public InetAddress getAddr(){
+        return socket.getInetAddress();
     }
     
     public void write(Request request) {
@@ -55,7 +56,6 @@ public class Session {
     }
     
     public void kick() {
-        banlist.add(socket.getInetAddress());
         write(new Request(Request.TYPE_KICK));
         try {
             socket.close();
