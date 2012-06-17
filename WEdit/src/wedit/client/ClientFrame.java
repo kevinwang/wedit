@@ -258,6 +258,7 @@ public class ClientFrame extends javax.swing.JFrame {
                             "Commands:\n"
                             + "nick <new name>\tChange your nickname\n"
                             + "sync\t\tSynchronize local document\n"
+                            + "sound\t\tToggle sound on/off\n"
                             + "help\t\tDisplay this list");
                 } else {
                     chatWrite("Command " + spl[0] + " not recognized.\n"
@@ -285,14 +286,11 @@ public class ClientFrame extends javax.swing.JFrame {
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
         JFileChooser fc = new JFileChooser();
         fc.showSaveDialog(getInstance());
-        System.out.println("1");
         try {
             BufferedWriter out = new BufferedWriter(new FileWriter(fc.getSelectedFile()));
             out.write(documentArea.getText());
             out.close();
-            System.out.println("2");
         }catch (IOException e){
-            System.out.println("Exception: " + e);       
         }
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
@@ -313,7 +311,21 @@ public class ClientFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_jCheckBoxMenuItem1ActionPerformed
 
     private void jMenuItem10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem10ActionPerformed
-        JOptionPane.showMessageDialog(getInstance(), "WEdit is a real-time interactive text editing program developed by Kevin Wang and Shan Shi", "About", JOptionPane.PLAIN_MESSAGE);
+        JOptionPane.showMessageDialog(getInstance(), "WEdit is a collaborative real time text editor with integrated chat functionality.\n"
+                + "Copyright \u00a9 2012  Kevin Wang and Shan Shi\n"
+                + "\n"
+                + "This program is free software: you can redistribute it and/or modify\n"
+                + "it under the terms of the GNU General Public License as published by\n"
+                + "the Free Software Foundation, either version 3 of the License, or\n"
+                + "(at your option) any later version.\n"
+                + "\n"
+                + "This program is distributed in the hope that it will be useful,\n"
+                + "but WITHOUT ANY WARRANTY; without even the implied warranty of\n"
+                + "MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the\n"
+                + "GNU General Public License for more details.\n"
+                + "\n"
+                + "You should have received a copy of the GNU General Public License\n"
+                + "along with this program.  If not, see <http://www.gnu.org/licenses/>.", "About", JOptionPane.PLAIN_MESSAGE);
     }//GEN-LAST:event_jMenuItem10ActionPerformed
 
     /**
