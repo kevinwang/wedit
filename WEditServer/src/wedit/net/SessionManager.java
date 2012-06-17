@@ -106,7 +106,9 @@ public class SessionManager {
             }
         }
         if(kicked){
-            SessionManager.getInstance().serverBroadcast(name + " was kicked.");
+            SessionManager.getInstance().serverBroadcast(name + " has been kicked from the server.");
+        } else {
+            ServerFrame.getInstance().consoleWrite("User " + name + " does not exist.");
         }
     }
     
