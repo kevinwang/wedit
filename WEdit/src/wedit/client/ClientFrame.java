@@ -5,6 +5,7 @@
 package wedit.client;
 import java.awt.event.KeyEvent;
 import java.io.FileInputStream;
+import javax.swing.JOptionPane;
 import javax.swing.text.DefaultCaret;
 import sun.audio.AudioPlayer;
 import sun.audio.AudioStream;
@@ -78,9 +79,8 @@ public class ClientFrame extends javax.swing.JFrame {
     }
     
     public void kickMsg(){
-        chatWrite("You were kicked and banned from the server.");
-        documentArea.setText("You were kicked and banned from the server.");
-        documentArea.enableInputMethods(false);
+        documentArea.setEditable(false);
+        JOptionPane.showMessageDialog(ClientFrame.getInstance(), "You were kicked from WEdit.", "Kicked", JOptionPane.WARNING_MESSAGE);
     }
     
     public void clear() {

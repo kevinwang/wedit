@@ -76,12 +76,11 @@ public class Request {
     public Request(String requestString) {
         String[] tokens = requestString.split(DELIMITER);
         requestType = tokens[0].charAt(0);
-        if (requestType == TYPE_CLEAR || requestType == TYPE_SYNC) {
+        if (requestType == TYPE_CLEAR || requestType == TYPE_SYNC || requestType == TYPE_KICK) {
             return;
         } else if (requestType == TYPE_CHAT || requestType == TYPE_NICK) {
             data = tokens[1];
-        }
-        else {
+        } else {
             index = Integer.parseInt(tokens[1]);
             if (requestType == TYPE_INSERT) {
                 data = tokens[2];
