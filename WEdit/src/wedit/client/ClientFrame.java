@@ -16,8 +16,7 @@ import wedit.net.Request;
  */
 public class ClientFrame extends javax.swing.JFrame {
     private static ClientFrame instance;
-    private AudioPlayer p = AudioPlayer.player;
-    private AudioStream as;
+    private boolean soundToggle = true;
     public static ClientFrame getInstance() {
         if (instance == null) {
             instance = new ClientFrame();
@@ -32,15 +31,26 @@ public class ClientFrame extends javax.swing.JFrame {
         initComponents();
         ((DefaultCaret)chatArea.getCaret()).setUpdatePolicy(DefaultCaret.ALWAYS_UPDATE);
         documentArea.setTabSize(Constants.TAB_SIZE);
-        try{
-            as = new AudioStream(new FileInputStream("src/sounds/notif.wav"));
-        }catch(Exception e){
-        }
+    }
+    
+    public String toggleSound(){
+        soundToggle = !soundToggle;
+        return soundToggle ? "on" : "off";
     }
     
     public void chatWrite(String s) {
         String text = chatArea.getText();
         chatArea.append((text.equals("") ? "" : "\n") + s);
+        if(soundToggle && !chatField.isFocusOwner() && !documentArea.isFocusOwner()){
+            AudioStream as = null;
+            try{
+                as = new AudioStream(new FileInputStream("src/sounds/notif.wav"));
+            }catch(Exception e){
+                System.out.println(e);
+            }
+            AudioPlayer.player.stop(as);
+            AudioPlayer.player.start(as);
+        }
     }
     
     public void insert(int index, String data) {
@@ -64,12 +74,6 @@ public class ClientFrame extends javax.swing.JFrame {
             documentArea.setCaretPosition(documentArea.getText().length());
         } else {
             documentArea.setCaretPosition(caretPos);
-        }
-    }
-    
-    public void notif(){
-        if(!(chatField.isFocusOwner() || documentArea.isFocusOwner())){
-            p.start(as);
         }
     }
     
@@ -170,6 +174,8 @@ public class ClientFrame extends javax.swing.JFrame {
                     }
                 } else if (spl[0].equals("sync")) {
                     WEdit.getInstance().makeRequest(new Request(Request.TYPE_SYNC));
+                } else if (spl[0].equals("sound")) {
+                    chatWrite("sound is " + toggleSound());
                 } else {
                     chatWrite("Command " + spl[0] + " not recognized.");
                 }
