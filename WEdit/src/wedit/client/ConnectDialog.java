@@ -20,6 +20,16 @@ public class ConnectDialog extends javax.swing.JFrame {
     public ConnectDialog() {
         initComponents();
     }
+    
+    private String RemoveSpaces(String s){
+        s = s.trim();
+        for(int i = 0; i < s.length(); i++){
+            if(s.charAt(i) == ' '){
+                s = s.substring(0,i) + "_" + s.substring(i+1);
+            }
+        }
+        return s;
+    }
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -103,7 +113,7 @@ public class ConnectDialog extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void submitButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_submitButtonMouseClicked
-        WEdit.getInstance(addressField.getText(), nickField.getText().trim()).start();
+        WEdit.getInstance(addressField.getText(), RemoveSpaces(nickField.getText())).start();
         setVisible(false);
         dispose();
     }//GEN-LAST:event_submitButtonMouseClicked

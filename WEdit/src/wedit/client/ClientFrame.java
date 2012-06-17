@@ -49,7 +49,7 @@ public class ClientFrame extends javax.swing.JFrame {
     public void chatWrite(String s) {
         String text = chatArea.getText();
         chatArea.append((text.equals("") ? "" : "\n") + s);
-        if (soundToggle) {
+        if (soundToggle && !documentArea.isFocusOwner() && !chatField.isFocusOwner()) {
             AudioStream as = null;
             try {
                 as = new AudioStream(new FileInputStream("src/sounds/notif.wav"));
