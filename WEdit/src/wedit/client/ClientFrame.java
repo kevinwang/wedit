@@ -5,7 +5,9 @@
 package wedit.client;
 
 import java.awt.event.KeyEvent;
-import java.io.FileInputStream;
+import java.io.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.text.DefaultCaret;
@@ -22,7 +24,6 @@ public class ClientFrame extends javax.swing.JFrame {
 
     private static ClientFrame instance;
     private boolean soundToggle = true;
-    private final JFileChooser fc = new JFileChooser();
 
     public static ClientFrame getInstance() {
         if (instance == null) {
@@ -86,7 +87,8 @@ public class ClientFrame extends javax.swing.JFrame {
 
     public void kickMsg() {
         documentArea.setEditable(false);
-        JOptionPane.showMessageDialog(ClientFrame.getInstance(), "You were kicked from WEdit.", "Kicked", JOptionPane.WARNING_MESSAGE);
+        JOptionPane.showMessageDialog(getInstance(), "You were kicked from WEdit.", "Kicked", JOptionPane.WARNING_MESSAGE);
+        
     }
 
     public void clear() {
@@ -104,7 +106,6 @@ public class ClientFrame extends javax.swing.JFrame {
 
         jScrollPane3 = new javax.swing.JScrollPane();
         jEditorPane2 = new javax.swing.JEditorPane();
-        jMenuItem8 = new javax.swing.JMenuItem();
         jScrollPane2 = new javax.swing.JScrollPane();
         documentArea = new javax.swing.JTextArea();
         jScrollPane5 = new javax.swing.JScrollPane();
@@ -127,8 +128,6 @@ public class ClientFrame extends javax.swing.JFrame {
         jMenuItem10 = new javax.swing.JMenuItem();
 
         jScrollPane3.setViewportView(jEditorPane2);
-
-        jMenuItem8.setText("jMenuItem8");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("WEdit");
@@ -161,11 +160,6 @@ public class ClientFrame extends javax.swing.JFrame {
 
         jMenuItem2.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.CTRL_MASK));
         jMenuItem2.setText("Save As...");
-        jMenuItem2.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jMenuItem2MouseClicked(evt);
-            }
-        });
         jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem2ActionPerformed(evt);
@@ -174,24 +168,19 @@ public class ClientFrame extends javax.swing.JFrame {
         jMenu1.add(jMenuItem2);
 
         jMenuItem4.setText("Import...");
-        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem4ActionPerformed(evt);
-            }
-        });
         jMenu1.add(jMenuItem4);
 
         jMenuItem3.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_P, java.awt.event.InputEvent.CTRL_MASK));
         jMenuItem3.setText("Print...");
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem3ActionPerformed(evt);
+            }
+        });
         jMenu1.add(jMenuItem3);
 
         jMenuItem1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_Q, java.awt.event.InputEvent.CTRL_MASK));
         jMenuItem1.setText("Exit");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
-            }
-        });
         jMenu1.add(jMenuItem1);
 
         jMenuBar1.add(jMenu1);
@@ -200,11 +189,6 @@ public class ClientFrame extends javax.swing.JFrame {
 
         jMenuItem5.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_C, java.awt.event.InputEvent.CTRL_MASK));
         jMenuItem5.setText("Copy");
-        jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem5ActionPerformed(evt);
-            }
-        });
         jMenu2.add(jMenuItem5);
 
         jMenuItem6.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_X, java.awt.event.InputEvent.CTRL_MASK));
@@ -213,11 +197,6 @@ public class ClientFrame extends javax.swing.JFrame {
 
         jMenuItem7.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_V, java.awt.event.InputEvent.CTRL_MASK));
         jMenuItem7.setText("Paste");
-        jMenuItem7.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem7ActionPerformed(evt);
-            }
-        });
         jMenu2.add(jMenuItem7);
 
         jMenuBar1.add(jMenu2);
@@ -307,32 +286,27 @@ public class ClientFrame extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_documentAreaKeyTyped
 
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
-
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        JFileChooser fc = new JFileChooser();
+        fc.showSaveDialog(getInstance());
+        System.out.println("1");
+        try {
+            BufferedWriter out = new BufferedWriter(new FileWriter(fc.getSelectedFile()));
+            out.write(documentArea.getText());
+            out.close();
+            System.out.println("2");
+        }catch (IOException e){
+            System.out.println("Exception: " + e);       
+        }
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
-    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItem4ActionPerformed
-
-    private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItem5ActionPerformed
-
-    private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItem7ActionPerformed
-
-    private void jMenuItem2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuItem2MouseClicked
-        int option = fc.showOpenDialog(ClientFrame.getInstance());  
-        if(option == JFileChooser.APPROVE_OPTION){  
-        if(fc.getSelectedFile()!=null){  
-        File theFileToSave = fc.getSelectedFile();  
-        
-    }//GEN-LAST:event_jMenuItem2MouseClicked
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+        try {
+            documentArea.print();
+        } catch (Exception pe) {
+            JOptionPane.showMessageDialog(getInstance(), "Printing failed", "Error", JOptionPane.WARNING_MESSAGE);
+        }
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -395,7 +369,6 @@ public class ClientFrame extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JMenuItem jMenuItem7;
-    private javax.swing.JMenuItem jMenuItem8;
     private javax.swing.JMenuItem jMenuItem9;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
