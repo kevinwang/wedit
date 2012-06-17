@@ -286,11 +286,13 @@ public class ClientFrame extends javax.swing.JFrame {
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
         JFileChooser fc = new JFileChooser();
         fc.showSaveDialog(getInstance());
-        try {
-            BufferedWriter out = new BufferedWriter(new FileWriter(fc.getSelectedFile()));
-            out.write(documentArea.getText());
-            out.close();
-        }catch (IOException e){
+        if (fc.getSelectedFile() != null) {
+            try {
+                BufferedWriter out = new BufferedWriter(new FileWriter(fc.getSelectedFile()));
+                out.write(documentArea.getText());
+                out.close();
+            } catch (IOException e) {
+            }
         }
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
