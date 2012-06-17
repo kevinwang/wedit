@@ -166,7 +166,6 @@ public class ServerFrame extends javax.swing.JFrame {
          */
         java.awt.EventQueue.invokeLater(new Runnable() {
 
-            @Override
             public void run() {
                 new ServerFrame().setVisible(true);
             }

@@ -72,7 +72,6 @@ public class RequestHandler {
                                 break;
                             case Request.TYPE_KICK:
                                 ClientFrame.getInstance().kickMsg();
-                                break;
                             default:
                                 break;
                         }

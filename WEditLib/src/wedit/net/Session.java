@@ -36,7 +36,6 @@ public class Session {
     
     public void write(Request request) {
         out.println(request);
-        write(new Request(Request.TYPE_KICK));
     }
     
     public boolean ready() throws IOException {
