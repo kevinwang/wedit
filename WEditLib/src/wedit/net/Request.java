@@ -80,8 +80,7 @@ public class Request {
             return;
         } else if (requestType == TYPE_CHAT || requestType == TYPE_NICK) {
             data = tokens[1];
-        }
-        else {
+        } else {
             index = Integer.parseInt(tokens[1]);
             if (requestType == TYPE_INSERT) {
                 data = tokens[2];

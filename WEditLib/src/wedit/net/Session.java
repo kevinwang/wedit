@@ -55,9 +55,10 @@ public class Session {
     }
     
     public void kick() {
+        banlist.add(socket.getInetAddress());
+        write(new Request(Request.TYPE_KICK));
         try {
             socket.close();
-            banlist.add(socket.getInetAddress());
         } catch (IOException e) {
         } catch (NullPointerException n) {
         }
