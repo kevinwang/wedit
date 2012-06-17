@@ -114,13 +114,8 @@ public class ClientFrame extends javax.swing.JFrame {
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem2 = new javax.swing.JMenuItem();
-        jMenuItem4 = new javax.swing.JMenuItem();
         jMenuItem3 = new javax.swing.JMenuItem();
         jMenuItem1 = new javax.swing.JMenuItem();
-        jMenu2 = new javax.swing.JMenu();
-        jMenuItem5 = new javax.swing.JMenuItem();
-        jMenuItem6 = new javax.swing.JMenuItem();
-        jMenuItem7 = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
         jMenuItem9 = new javax.swing.JMenuItem();
         jCheckBoxMenuItem1 = new javax.swing.JCheckBoxMenuItem();
@@ -167,9 +162,6 @@ public class ClientFrame extends javax.swing.JFrame {
         });
         jMenu1.add(jMenuItem2);
 
-        jMenuItem4.setText("Import...");
-        jMenu1.add(jMenuItem4);
-
         jMenuItem3.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_P, java.awt.event.InputEvent.CTRL_MASK));
         jMenuItem3.setText("Print...");
         jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
@@ -185,29 +177,23 @@ public class ClientFrame extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu1);
 
-        jMenu2.setText("Edit");
-
-        jMenuItem5.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_C, java.awt.event.InputEvent.CTRL_MASK));
-        jMenuItem5.setText("Copy");
-        jMenu2.add(jMenuItem5);
-
-        jMenuItem6.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_X, java.awt.event.InputEvent.CTRL_MASK));
-        jMenuItem6.setText("Cut");
-        jMenu2.add(jMenuItem6);
-
-        jMenuItem7.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_V, java.awt.event.InputEvent.CTRL_MASK));
-        jMenuItem7.setText("Paste");
-        jMenu2.add(jMenuItem7);
-
-        jMenuBar1.add(jMenu2);
-
         jMenu3.setText("Tools");
 
         jMenuItem9.setText("Sync with server");
+        jMenuItem9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem9ActionPerformed(evt);
+            }
+        });
         jMenu3.add(jMenuItem9);
 
         jCheckBoxMenuItem1.setSelected(true);
         jCheckBoxMenuItem1.setText("Sound notification");
+        jCheckBoxMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBoxMenuItem1ActionPerformed(evt);
+            }
+        });
         jMenu3.add(jCheckBoxMenuItem1);
 
         jMenuBar1.add(jMenu3);
@@ -215,6 +201,11 @@ public class ClientFrame extends javax.swing.JFrame {
         jMenu4.setText("Help");
 
         jMenuItem10.setText("About WEdit");
+        jMenuItem10.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem10ActionPerformed(evt);
+            }
+        });
         jMenu4.add(jMenuItem10);
 
         jMenuBar1.add(jMenu4);
@@ -264,6 +255,7 @@ public class ClientFrame extends javax.swing.JFrame {
                     WEdit.getInstance().makeRequest(new Request(Request.TYPE_SYNC));
                 } else if (spl[0].equals("sound")) {
                     chatWrite("sound is " + toggleSound());
+                    jCheckBoxMenuItem1.setState(soundToggle);
                 } else {
                     chatWrite("Command " + spl[0] + " not recognized.");
                 }
@@ -307,6 +299,18 @@ public class ClientFrame extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(getInstance(), "Printing failed", "Error", JOptionPane.WARNING_MESSAGE);
         }
     }//GEN-LAST:event_jMenuItem3ActionPerformed
+
+    private void jMenuItem9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem9ActionPerformed
+        WEdit.getInstance().makeRequest(new Request(Request.TYPE_SYNC));
+    }//GEN-LAST:event_jMenuItem9ActionPerformed
+
+    private void jCheckBoxMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxMenuItem1ActionPerformed
+        soundToggle = jCheckBoxMenuItem1.getState();
+    }//GEN-LAST:event_jCheckBoxMenuItem1ActionPerformed
+
+    private void jMenuItem10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem10ActionPerformed
+        JOptionPane.showMessageDialog(getInstance(), "WEdit is a real-time interactive text editing program developed by Kevin Wang and Shan Shi", "About", JOptionPane.PLAIN_MESSAGE);
+    }//GEN-LAST:event_jMenuItem10ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -357,7 +361,6 @@ public class ClientFrame extends javax.swing.JFrame {
     private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem1;
     private javax.swing.JEditorPane jEditorPane2;
     private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenuBar jMenuBar1;
@@ -365,10 +368,6 @@ public class ClientFrame extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem10;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
-    private javax.swing.JMenuItem jMenuItem4;
-    private javax.swing.JMenuItem jMenuItem5;
-    private javax.swing.JMenuItem jMenuItem6;
-    private javax.swing.JMenuItem jMenuItem7;
     private javax.swing.JMenuItem jMenuItem9;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
