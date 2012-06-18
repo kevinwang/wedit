@@ -70,7 +70,7 @@ public class RequestHandler {
                                 ClientFrame.getInstance().clear();
                                 break;
                             case Request.TYPE_KICK:
-                                ClientFrame.getInstance().kickMsg();
+                                ClientFrame.getInstance().banMsg();
                             default:
                                 break;
                         }

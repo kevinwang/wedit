@@ -22,7 +22,7 @@ public class SessionManager {
     
     private ServerSocket server;
     private Set<Session> activeSessions;
-    private ArrayList<InetAddress> banlist = new ArrayList<InetAddress>();
+    private ArrayList<InetAddress> banList = new ArrayList<InetAddress>();
     
     public static SessionManager getInstance() {
         if (instance == null) {
@@ -49,7 +49,7 @@ public class SessionManager {
                 try {
                     Socket s = server.accept();
                     Session ses = new Session(s);
-                    if(!banlist.contains(s.getInetAddress())){
+                    if(!banList.contains(s.getInetAddress())){
                         activeSessions.add(ses);
                         sendDocument(ses);
                         SessionManager.getInstance().serverBroadcast(ses + " has opened the document.");
@@ -98,19 +98,19 @@ public class SessionManager {
         ServerFrame.getInstance().consoleWrite("[CHAT] <" + r.getOrigin() + "> " + r.getData());
     }
     
-    public void kick(String name){
-        boolean kicked = false;
+    public void ban(String name){
+        boolean banned = false;
         for(Session s : activeSessions){
             if(s.toString().equals(name)){
-                kicked = true;
-                banlist.add(s.getAddr());
+                banned = true;
+                banList.add(s.getAddr());
                 s.write(new Request(Request.TYPE_KICK));
                 activeSessions.remove(s); 
                 s.close();
             }
         }
-        if(kicked){
-            SessionManager.getInstance().serverBroadcast(name + " has been kicked from the server.");
+        if(banned){
+            SessionManager.getInstance().serverBroadcast(name + " has been banned from the server.");
         } else {
             ServerFrame.getInstance().consoleWrite("User " + name + " does not exist.");
         }

@@ -83,9 +83,9 @@ public class ClientFrame extends javax.swing.JFrame {
         }
     }
 
-    public void kickMsg() {
+    public void banMsg() {
         documentArea.setEditable(false);
-        JOptionPane.showMessageDialog(ClientFrame.getInstance(), "You have been kicked from the server.", "Kicked", JOptionPane.WARNING_MESSAGE);
+        JOptionPane.showMessageDialog(ClientFrame.getInstance(), "You have been banned from the server.", "Banned", JOptionPane.WARNING_MESSAGE);
     }
 
     public void clear() {
