@@ -170,6 +170,11 @@ public class ClientFrame extends javax.swing.JFrame {
 
         jMenuItem1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_Q, java.awt.event.InputEvent.CTRL_MASK));
         jMenuItem1.setText("Exit");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
         jMenu1.add(jMenuItem1);
 
         jMenuBar1.add(jMenu1);
@@ -286,11 +291,13 @@ public class ClientFrame extends javax.swing.JFrame {
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
         JFileChooser fc = new JFileChooser();
         fc.showSaveDialog(getInstance());
-        try {
-            BufferedWriter out = new BufferedWriter(new FileWriter(fc.getSelectedFile()));
-            out.write(documentArea.getText());
-            out.close();
-        }catch (IOException e){
+        if (fc.getSelectedFile() != null) {
+            try {
+                BufferedWriter out = new BufferedWriter(new FileWriter(fc.getSelectedFile()));
+                out.write(documentArea.getText());
+                out.close();
+            } catch (IOException e) {
+            }
         }
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
@@ -327,6 +334,10 @@ public class ClientFrame extends javax.swing.JFrame {
                 + "You should have received a copy of the GNU General Public License\n"
                 + "along with this program.  If not, see <http://www.gnu.org/licenses/>.", "About", JOptionPane.PLAIN_MESSAGE);
     }//GEN-LAST:event_jMenuItem10ActionPerformed
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        System.exit(0);
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     /**
      * @param args the command line arguments
