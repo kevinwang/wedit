@@ -1,5 +1,9 @@
 WEdit by Kevin Wang and Shan Shi
 
+HOW TO RUN:
+    Server: `java -jar WEditServer/dist/WEditServer.jar'
+    Client: `java -jar WEdit/dist/WEdit.jar'
+
 Description
     WEdit is a collaborative real time text editor with integrated chat functionality.
 
